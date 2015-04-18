@@ -4,7 +4,7 @@
   "description": "wordbin",
   "scripts": {
     "start": "node dist/server/app.js",
-    "postinstall": "npm install --dev && ./node_modules/bower/bin/bower install && ./node_modules/grunt-cli/bin/grunt"
+    "postinstall": "npm install && ./node_modules/bower/bin/bower install && ./node_modules/grunt-cli/bin/grunt"
   },
   "author": "Rafał Krupiński <rkrupinski.npm@gmail.com> (http://rkrupinski.com/)",
   "license": "MIT",
