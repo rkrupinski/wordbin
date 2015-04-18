@@ -4,7 +4,7 @@ module.exports = function (grunt) {
 
   grunt.config('shell', {
     heroku: {
-      command: './node_modules/bower/bin/bower/install'
+      command: './node_modules/bower/bin/bower install'
     }
   });
 
