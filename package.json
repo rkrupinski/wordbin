@@ -19,7 +19,8 @@
     "lodash": "^3.5.0",
     "method-override": "^2.3.2",
     "morgan": "^1.5.2",
-    "serve-favicon": "^2.2.0"
+    "serve-favicon": "^2.2.0",
+    "time-grunt": "^1.1.1"
   },
   "devDependencies": {
     "connect-livereload": "^0.5.3",
@@ -44,7 +45,6 @@
     "grunt-shell": "^1.1.2",
     "grunt-usemin": "^3.0.0",
     "grunt-wiredep": "^2.0.0",
-    "jshint-stylish": "^1.0.1",
-    "time-grunt": "^1.1.1"
+    "jshint-stylish": "^1.0.1"
   }
 }
