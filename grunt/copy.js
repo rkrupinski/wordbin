@@ -20,7 +20,6 @@ module.exports = function (grunt) {
           expand: true,
           dest: '<%= directories.dist %>',
           src: [
-            'package.json',
             'server/**/*'
           ]
         }
