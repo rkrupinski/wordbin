@@ -20,8 +20,16 @@ module.exports = function (grunt) {
           expand: true,
           dest: '<%= directories.dist %>',
           src: [
-            'package.json',
             'server/**/*'
+          ]
+        },
+        {
+          // TODO: Image compression
+          expand: true,
+          cwd: '<%= directories.client %>',
+          dest: '<%= directories.dist %>/public',
+          src: [
+            'images/**/*.{jpg,png,gif,svg}'
           ]
         }
       ]

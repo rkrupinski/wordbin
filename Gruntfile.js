@@ -74,10 +74,8 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('heroku', [
-    'lint',
-    'test',
     'shell:heroku',
-    'build'
+    'default'
   ]);
 
   grunt.registerTask('default', [
