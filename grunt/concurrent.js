@@ -4,8 +4,7 @@ module.exports = function (grunt) {
 
   grunt.config('concurrent', {
     dist: [
-      'sass',
-      'imagemin'
+      'sass'
     ],
     server: [
       'sass'
