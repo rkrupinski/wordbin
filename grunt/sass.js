@@ -4,9 +4,6 @@ module.exports = function (grunt) {
 
   grunt.config('sass', {
     all: {
-      options: {
-        compass: false
-      },
       files: {
         '<%= directories.tmp %>/css/app.css':
             '<%= directories.client %>/sass/app.scss'
@@ -14,6 +11,6 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-sass');
 
 };
