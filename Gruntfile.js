@@ -73,7 +73,7 @@ module.exports = function(grunt) {
     'htmlmin'
   ]);
 
-  grunt.registerTask('heroku:production', [
+  grunt.registerTask('heroku', [
     'shell:heroku',
     'default'
   ]);
