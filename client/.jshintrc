@@ -10,7 +10,7 @@
   },
   "latedef": "nofunc",
   "maxdepth": 2,
-  "maxparams": 3,
+  "maxparams": 5,
   "noarg": true,
   "nonbsp": true,
   "nonew": true,
