@@ -35,6 +35,11 @@
             '@': {
               templateUrl: 'views/home.html'
             }
+          },
+          data: {
+            meta: {
+              title: 'Home'
+            }
           }
         });
   }
