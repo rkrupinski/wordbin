@@ -9,12 +9,18 @@
 
     .config(routesConfig);
 
-  function appConfig($locationProvider) {
+  function appConfig($locationProvider, $compileProvider, env) {
     $locationProvider.html5Mode(true);
+
+    if (env === 'prod') {
+      $compileProvider.debugInfoEnabled(false);
+    }
   }
 
   appConfig.$inject = [
-    '$locationProvider'
+    '$locationProvider',
+    '$compileProvider',
+    'env'
   ];
 
   function routesConfig($stateProvider, $urlRouterProvider) {
