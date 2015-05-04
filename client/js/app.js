@@ -32,13 +32,14 @@
 
       .state('app', {
         abstract: true,
-        url: '/app'
+        url: '/app',
+        templateUrl: 'views/app.html'
       })
 
         .state('app.home', {
           url: '/home',
           views: {
-            '@': {
+            '': {
               templateUrl: 'views/home.html'
             }
           },
