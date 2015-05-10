@@ -2,15 +2,20 @@
   'use strict';
 
   var configs = {
+
     shared: {
-      appName: 'WordBin'
+      appName: 'WordBin',
+      authProvider: 'twitter'
     },
+
     dev: {
-      firebase: ''
+      firebaseUrl: 'https://wordbin-dev.firebaseio.com/'
     },
+
     prod: {
-      firebase: ''
+      firebaseUrl: ''
     }
+
   };
 
   function config(env) {

@@ -6,7 +6,8 @@
   "freeze": true,
   "futurehostile": true,
   "globals": {
-    "angular": false
+    "angular": false,
+    "Firebase": false
   },
   "latedef": "nofunc",
   "maxdepth": 2,

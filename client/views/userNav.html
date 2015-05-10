@@ -1,0 +1,19 @@
+<ul class="nav navbar-nav navbar-right">
+  <li ng-if="!isLoggedIn">
+    <a href="#" ng-click="login($event)">Sign in with Twitter</a>
+  </li>
+  <li ng-if="isLoggedIn" class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+      <span>John Smith</span>
+      <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu" role="menu">
+      <li>
+        <a href="#">Profile</a>
+      </li>
+      <li>
+        <a href="#" ng-click="logout($event)">Logout</a>
+      </li>
+    </ul>
+  </li>
+</ul>
