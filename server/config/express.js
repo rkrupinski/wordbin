@@ -32,7 +32,12 @@ module.exports = function (app) {
     app.use(require('connect-livereload')());
     app.use(express.static(path.join(config.root, '.tmp')));
     app.use(express.static(path.join(config.root, 'client')));
-    app.set('appPath', path.join(config.root + '/client'));
+
+    // Serve bootstrap-sass assets directory
+    app.use(express.static(path.join(config.root,
+        'client/bower_components/bootstrap-sass/assets')));
+
+    app.set('appPath', path.join(config.root, 'client'));
     app.locals.pretty = true;
     app.use(morgan('dev'));
   }

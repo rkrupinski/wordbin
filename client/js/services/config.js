@@ -2,6 +2,9 @@
   'use strict';
 
   var configs = {
+    shared: {
+      appName: 'WordBin'
+    },
     dev: {
       firebase: ''
     },
@@ -11,10 +14,7 @@
   };
 
   function config(env) {
-
-    return angular.extend({
-      appName: 'WordBin'
-    }, configs[env]);
+    return angular.extend({}, configs.shared, configs[env]);
   }
 
   config.$inject = ['env'];
