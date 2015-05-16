@@ -3,6 +3,7 @@
 
   angular.module('wordbin', [
     'ui.router',
+    'ui.bootstrap',
     'firebase'
   ])
 
