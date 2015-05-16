@@ -1,27 +1,39 @@
 (function () {
   'use strict';
 
-  function auth($state, $q, authObj, config) {
+  function auth($state, authObj, user, config) {
 
     return {
 
       login: function login() {
+
         return authObj.$authWithOAuthPopup(config.authProvider)
 
-            .then(function (authData) {
-              $state.reload();
+            .then(function () {
+              var authData = authObj.$getAuth();
 
-              return authData;
+              user.exists(authData.uid)
+
+                  .then(function (exists) {
+                    if (!exists) {
+                      return user.create(authData);
+                    }
+                  })
+
+                  .catch(function () {
+                    authObj.$unauth();
+                  })
+
+                  .finally(function () {
+                    $state.reload();
+                  });
             });
       },
 
       logout: function logout() {
-        return $q.when()
+        authObj.$unauth();
 
-            .then(function () {
-              authObj.$unauth();
-              $state.reload();
-            });
+        $state.reload();
       },
 
       isLoggedIn: function isLoggedIn() {
@@ -33,8 +45,8 @@
 
   auth.$inject = [
     '$state',
-    '$q',
     'authObj',
+    'user',
     'config'
   ];
 

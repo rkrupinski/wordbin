@@ -24,7 +24,16 @@
   "requireLineBreakAfterVariableAssignment": true,
   "requireOperatorBeforeLineBreak": true,
   "requirePaddingNewLineAfterVariableDeclaration": true,
-  "requirePaddingNewlinesBeforeKeywords": true,
+  "requirePaddingNewlinesBeforeKeywords": [
+    "do",
+    "for",
+    "if",
+    "switch",
+    "case",
+    "try",
+    "while",
+    "return"
+  ],
   "requirePaddingNewLinesBeforeLineComments": {
     "allExcept": "firstAfterCurly"
   },

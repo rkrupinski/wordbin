@@ -13,7 +13,7 @@
     },
 
     prod: {
-      firebaseUrl: ''
+      firebaseUrl: 'https://wordbin.firebaseio.com/'
     }
 
   };

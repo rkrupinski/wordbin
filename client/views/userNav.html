@@ -2,9 +2,14 @@
   <li ng-if="!isLoggedIn">
     <a href="#" ng-click="login($event)">Sign in with Twitter</a>
   </li>
-  <li ng-if="isLoggedIn" class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-      <span>John Smith</span>
+  <li ng-if="isLoggedIn && user" class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+        role="button" aria-expanded="false">
+      <span class="user-nav">
+        <img class="user-nav__avatar" width="25" height="25"
+            src="{{ user.image }}" alt="{{ user.name }}">
+        <span class="user-nav__name">{{ user.name }}</span>
+      </span>
       <span class="caret"></span>
     </a>
     <ul class="dropdown-menu" role="menu">

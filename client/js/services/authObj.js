@@ -9,7 +9,7 @@
 
   authObj.$inject = [
     '$firebaseAuth',
-    'config'
+    'firebaseRef'
   ];
 
   angular.module('wordbin')

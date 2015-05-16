@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  function userNav(auth) {
+  function userNav(auth, user) {
 
     return {
       restrict: 'E',
@@ -23,12 +23,17 @@
 
         scope.isLoggedIn = auth.isLoggedIn();
 
+        user.get().then(function (data) {
+          scope.user = data;
+        });
+
       }
     };
   }
 
   userNav.$inject = [
-    'auth'
+    'auth',
+    'user'
   ];
 
   angular.module('wordbin')

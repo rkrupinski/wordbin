@@ -1,15 +1,14 @@
 (function () {
   'use strict';
 
-  function firebaseRef(config) {
-    function factory(path) {
+  function firebaseRef(Firebase, config) {
+    return function (path) {
       return new Firebase(config.firebaseUrl + (path || ''));
-    }
-
-    return factory;
+    };
   }
 
   firebaseRef.$inject = [
+    'Firebase',
     'config'
   ];
 
