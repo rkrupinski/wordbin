@@ -13,7 +13,8 @@
     },
 
     prod: {
-      firebaseUrl: 'https://wordbin.firebaseio.com/'
+      // firebaseUrl: 'https://wordbin.firebaseio.com/'
+      firebaseUrl: 'foo'
     }
 
   };
