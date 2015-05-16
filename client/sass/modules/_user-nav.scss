@@ -1,0 +1,19 @@
+.user-nav {
+  display: inline-block;
+  padding-left: 30px;
+  position: relative;
+
+  &__name {
+    @extend %ellipsis;
+
+    display: inline-block;
+    vertical-align: middle;
+    max-width: 200px;
+  }
+
+  &__avatar {
+    @include center;
+
+    left: 0;
+  }
+}

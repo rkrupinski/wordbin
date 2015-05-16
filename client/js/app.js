@@ -2,7 +2,8 @@
   'use strict';
 
   angular.module('wordbin', [
-    'ui.router'
+    'ui.router',
+    'firebase'
   ])
 
     .config(appConfig)
