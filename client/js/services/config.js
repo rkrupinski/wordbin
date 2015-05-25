@@ -25,8 +25,8 @@
 
   config.$inject = ['env'];
 
-  angular.module('wordbin')
+  angular.module('wordbin.services')
 
-    .factory('config', config);
+      .factory('config', config);
 
 }());

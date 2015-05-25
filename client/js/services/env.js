@@ -6,9 +6,9 @@
     'wordbin.herokuapp.com'
   ];
 
-  angular.module('wordbin')
+  angular.module('wordbin.services')
 
-    .constant('env', hosts.indexOf(location.host) !== -1 ?
-        'prod' : 'dev');
+      .constant('env', hosts.indexOf(location.host) !== -1 ?
+          'prod' : 'dev');
 
 }());

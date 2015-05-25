@@ -50,8 +50,8 @@
     'config'
   ];
 
-  angular.module('wordbin')
+  angular.module('wordbin.services')
 
-    .factory('auth', auth);
+      .factory('auth', auth);
 
 }());

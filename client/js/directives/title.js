@@ -34,8 +34,8 @@
     'config'
   ];
 
-  angular.module('wordbin')
+  angular.module('wordbin.directives')
 
-    .directive('title', titleDirective);
+      .directive('title', titleDirective);
 
 }());

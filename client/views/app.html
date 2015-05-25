@@ -2,12 +2,14 @@
   <div class="container">
     
     <div class="navbar-header">
-      <a class="navbar-brand" href="/">
+      <a class="navbar-brand" ui-sref="app.home">
         Word
         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
         Bin
       </a>
     </div>
+
+    <entry-form></entry-form>
 
     <user-nav></user-nav>
 
@@ -15,3 +17,7 @@
 </nav>
 
 <div class="container" ui-view></div>
+
+<div class="container">
+  <p class="text-center">&copy; WordBin 2015</p>
+</div>

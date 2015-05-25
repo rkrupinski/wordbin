@@ -1,15 +1,25 @@
 (function () {
   'use strict';
 
-  angular.module('wordbin', [
-    'ui.router',
-    'ui.bootstrap',
-    'firebase'
-  ])
+  angular.module('wordbin.controllers', []);
+  angular.module('wordbin.directives', []);
+  angular.module('wordbin.services', []);
+  angular.module('wordbin.filters', []);
 
-    .config(appConfig)
+  angular
 
-    .config(routesConfig);
+      .module('wordbin', [
+        'ui.router',
+        'ui.bootstrap',
+        'firebase',
+        'wordbin.controllers',
+        'wordbin.directives',
+        'wordbin.services',
+        'wordbin.filters'
+      ])
+
+      .config(appConfig)
+      .config(routesConfig);
 
   function appConfig($locationProvider, $compileProvider, env) {
     $locationProvider.html5Mode(true);

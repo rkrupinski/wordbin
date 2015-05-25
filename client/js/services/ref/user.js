@@ -12,8 +12,8 @@
     'usersRef'
   ];
 
-  angular.module('wordbin')
+  angular.module('wordbin.services')
 
-    .factory('userRef', userRef);
+      .factory('userRef', userRef);
 
 }());

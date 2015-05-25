@@ -1,43 +1,56 @@
 (function () {
   'use strict';
 
-  function userNav(auth, user) {
+  function UserNavCtrl(auth, user) {
+    this._auth = auth;
+    this._user = user;
 
-    return {
-      restrict: 'E',
-      replace: true,
-      templateUrl: 'views/userNav.html',
-      link: function (scope) {
+    this.isLoggedIn = auth.isLoggedIn();
 
-        scope.login = function (e) {
-          e.preventDefault();
-
-          auth.login();
-        };
-
-        scope.logout = function (e) {
-          e.preventDefault();
-
-          auth.logout();
-        };
-
-        scope.isLoggedIn = auth.isLoggedIn();
-
-        user.get().then(function (data) {
-          scope.user = data;
-        });
-
-      }
-    };
+    this._loadUserData();
   }
 
-  userNav.$inject = [
+  UserNavCtrl.prototype._loadUserData = function () {
+    var self = this;
+
+    this._user.get().then(function (data) {
+      self.userData = data;
+    });
+  };
+
+  UserNavCtrl.prototype.login = function (e) {
+    e.preventDefault();
+
+    this._auth.login();
+  };
+
+  UserNavCtrl.prototype.logout = function (e) {
+    e.preventDefault();
+
+    this._auth.logout();
+  };
+
+  UserNavCtrl.$inject = [
     'auth',
     'user'
   ];
 
-  angular.module('wordbin')
+  function userNav() {
 
-    .directive('userNav', userNav);
+    return {
+      restrict: 'E',
+      replace: true,
+      scope: {},
+      templateUrl: 'views/userNav.html',
+      controller: UserNavCtrl,
+      controllerAs: 'ctrl'
+    };
+  }
+
+  userNav.$inject = [];
+
+  angular.module('wordbin.directives')
+
+      .directive('userNav', userNav);
 
 }());

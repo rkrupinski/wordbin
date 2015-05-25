@@ -12,8 +12,8 @@
     'firebaseRef'
   ];
 
-  angular.module('wordbin')
+  angular.module('wordbin.services')
 
-    .factory('authObj', authObj);
+      .factory('authObj', authObj);
 
 }());

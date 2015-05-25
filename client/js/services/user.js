@@ -6,19 +6,42 @@
     return {
 
       get: function () {
-        var authData = authObj.$getAuth(),
-            defer = $q.defer();
 
-        if (!authData) {
-          defer.reject();
-        } else {
-          userRef(authData.uid).once('value', function (snap) {
-            defer.resolve(snap.val());
+        var cachedUser;
+
+        return function () {
+          var authData = authObj.$getAuth(),
+              ret;
+
+          switch (true) {
+
+            case !authData:
+              ret = $q.reject();
+              break;
+
+            case !!cachedUser:
+              ret = $q.when(cachedUser);
+              break;
+
+            default:
+              ret = loadUser(authData);
+              break;
+          }
+
+          return ret;
+        };
+
+        function loadUser(data) {
+          var defer = $q.defer();
+
+          userRef(data.uid).once('value', function (snap) {
+            defer.resolve(cachedUser = snap.val());
           });
+
+          return defer.promise;
         }
 
-        return defer.promise;
-      },
+      }(),
 
       exists: function (uid) {
         var defer = $q.defer();
@@ -69,8 +92,8 @@
     'authObj'
   ];
 
-  angular.module('wordbin')
+  angular.module('wordbin.services')
 
-    .factory('user', user);
+      .factory('user', user);
 
 }());

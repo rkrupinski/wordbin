@@ -1,14 +1,16 @@
 <ul class="nav navbar-nav navbar-right">
-  <li ng-if="!isLoggedIn">
-    <a href="#" ng-click="login($event)">Sign in with Twitter</a>
+
+  <li ng-if="!ctrl.isLoggedIn">
+    <a href="#" ng-click="ctrl.login($event)" role="button">Sign in with Twitter</a>
   </li>
-  <li ng-if="isLoggedIn && user" class="dropdown">
+
+  <li ng-if="ctrl.isLoggedIn && ctrl.userData" class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown"
         role="button" aria-expanded="false">
       <span class="user-nav">
         <img class="user-nav__avatar" width="25" height="25"
-            src="{{ user.image }}" alt="{{ user.name }}">
-        <span class="user-nav__name">{{ user.name }}</span>
+            src="{{ ctrl.userData.image }}" alt="{{ ctrl.userData.name }}">
+        <span class="user-nav__name">{{ ctrl.userData.name }}</span>
       </span>
       <span class="caret"></span>
     </a>
@@ -17,8 +19,9 @@
         <a href="#">Profile</a>
       </li>
       <li>
-        <a href="#" ng-click="logout($event)">Logout</a>
+        <a href="#" ng-click="ctrl.logout($event)" role="button">Logout</a>
       </li>
     </ul>
   </li>
+
 </ul>

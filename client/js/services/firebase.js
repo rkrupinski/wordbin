@@ -7,8 +7,8 @@
 
   firebase.$inject = [];
 
-  angular.module('wordbin')
+  angular.module('wordbin.services')
 
-    .factory('firebase', firebase);
+      .factory('firebase', firebase);
 
 }());

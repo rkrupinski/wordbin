@@ -12,8 +12,8 @@
     'rootRef'
   ];
 
-  angular.module('wordbin')
+  angular.module('wordbin.services')
 
-    .factory('usersRef', usersRef);
+      .factory('usersRef', usersRef);
 
 }());
