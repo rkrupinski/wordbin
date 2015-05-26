@@ -50,6 +50,7 @@
 
         .state('app.home', {
           url: '/home',
+          controller: 'HomeCtrl as ctrl',
           views: {
             '': {
               templateUrl: 'views/home.html'
@@ -60,6 +61,37 @@
               title: 'Home'
             }
           }
+        })
+
+        .state('app.profile', {
+          url: '/profile/{username}',
+          controller: 'ProfileCtrl as ctrl',
+          views: {
+            '': {
+              templateUrl: 'views/profile.html'
+            }
+          },
+          data: {
+            meta: {
+
+            }
+          },
+          resolve: {
+            userData: [
+              'user',
+              '$stateParams',
+              function (user, $stateParams) {
+                return user.get($stateParams.username);
+              }
+            ]
+          },
+          onEnter: [
+            '$state',
+            'userData',
+            function ($state, userData) {
+              console.log('$state', userData);
+            }
+          ]
         });
   }
 

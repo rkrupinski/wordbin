@@ -18,13 +18,14 @@
     this._entryModal.prompt()
 
         .then(function (data) {
+          console.log('success');
 
           return self._save(data);
         })
 
-        .catch(function (err) {
+        .catch(function (reason) {
           // TODO
-          console.log(err.message);
+          console.log(reason);
         })
 
         .finally(function () {

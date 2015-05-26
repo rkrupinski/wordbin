@@ -15,7 +15,7 @@
   EntryModalCtrl.prototype._loadUserData = function () {
     var self = this;
 
-    this._user.get().then(function (data) {
+    this._user.current().then(function (data) {
       self.userData = data;
     });
   };

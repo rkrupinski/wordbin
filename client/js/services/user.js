@@ -1,11 +1,11 @@
 (function () {
   'use strict';
 
-  function user($q, userRef, authObj) {
+  function user($q, usersRef, userRef, authObj) {
 
     return {
 
-      get: function () {
+      current: function () {
 
         var cachedUser;
 
@@ -43,6 +43,18 @@
 
       }(),
 
+      get: function (/* username */) {
+        var defer = $q.defer();
+
+        // TODO:
+        // * Index on username
+        // * Priority
+        // * http://jsfiddle.net/katowulf/HLUc5/
+        defer.resolve();
+
+        return defer.promise;
+      },
+
       exists: function (uid) {
         var defer = $q.defer();
 
@@ -54,7 +66,8 @@
       },
 
       create: function (authData) {
-        var defer = $q.defer(),
+        var ref = userRef(authData.uid),
+            defer = $q.defer(),
             data;
 
         try {
@@ -72,12 +85,18 @@
 
         }
 
-        userRef(authData.uid).set(data, function (err) {
+        ref.set(data, function (err) {
           if (err) {
             defer.reject(err);
           }
 
-          defer.resolve();
+          ref.child('username').setPriority(10, function (err) {
+            if (err) {
+              defer.reject(err);
+            }
+
+            defer.resolve();
+          });
         });
 
         return defer.promise;
@@ -88,6 +107,7 @@
 
   user.$inject = [
     '$q',
+    'usersRef',
     'userRef',
     'authObj'
   ];
