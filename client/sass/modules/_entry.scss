@@ -1,0 +1,19 @@
+.entry {
+  min-height: 4em;
+  padding-left: 4.5em;
+  position: relative;
+
+  &__avatar {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  &__body {
+
+    textarea {
+      height: 6em;
+      resize: vertical;
+    }
+  }
+}
