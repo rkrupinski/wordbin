@@ -1,10 +1,10 @@
 (function () {
   'use strict';
 
-  function EntryWidgetCtrl($q, $modal, auth, entryModal) {
-    this._q = $q;
+  function EntryWidgetCtrl($modal, auth, entryModal, entry) {
     this._modal = $modal;
     this._entryModal = entryModal;
+    this._entry = entry;
 
     this.disableSubmit = false;
     this.isLoggedIn = auth.isLoggedIn();
@@ -18,8 +18,6 @@
     this._entryModal.prompt()
 
         .then(function (data) {
-          console.log('success');
-
           return self._save(data);
         })
 
@@ -34,17 +32,14 @@
   };
 
   EntryWidgetCtrl.prototype._save = function (data) {
-    console.log(data);
-
-    // TODO
-    return this._q.when();
+    return this._entry.create(data);
   };
 
   EntryWidgetCtrl.$inject = [
-    '$q',
     '$modal',
     'auth',
-    'entryModal'
+    'entryModal',
+    'entry'
   ];
 
   function entryWidget() {
