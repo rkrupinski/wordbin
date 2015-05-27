@@ -1,11 +1,13 @@
 (function () {
   'use strict';
 
-  function ProfileCtrl() {
-
+  function ProfileCtrl(userData) {
+    console.log('Profile:', userData);
   }
 
-  ProfileCtrl.$inject = [];
+  ProfileCtrl.$inject = [
+    'userData'
+  ];
 
   angular.module('wordbin.controllers')
 

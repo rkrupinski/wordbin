@@ -38,9 +38,19 @@
   function routesConfig($stateProvider, $urlRouterProvider) {
     $urlRouterProvider
 
-      .otherwise('/app/home');
+      .otherwise('/404');
 
     $stateProvider
+
+      .state('404', {
+        url: '/404',
+        templateUrl: 'views/404.html',
+        data: {
+          meta: {
+            title: 'Page not found'
+          }
+        }
+      })
 
       .state('app', {
         abstract: true,
@@ -50,9 +60,9 @@
 
         .state('app.home', {
           url: '/home',
-          controller: 'HomeCtrl as ctrl',
           views: {
             '': {
+              controller: 'HomeCtrl as ctrl',
               templateUrl: 'views/home.html'
             }
           },
@@ -65,9 +75,9 @@
 
         .state('app.profile', {
           url: '/profile/{username}',
-          controller: 'ProfileCtrl as ctrl',
           views: {
             '': {
+              controller: 'ProfileCtrl as ctrl',
               templateUrl: 'views/profile.html'
             }
           },
@@ -89,7 +99,15 @@
             '$state',
             'userData',
             function ($state, userData) {
-              console.log('$state', userData);
+              if (!userData) {
+                return $state.go('404');
+              }
+
+              $state.transition.then(function (toState) {
+                angular.extend(toState.data.meta, {
+                  title: userData.name
+                });
+              });
             }
           ]
         });

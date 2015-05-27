@@ -4,8 +4,7 @@
   var configs = {
 
     shared: {
-      appName: 'WordBin',
-      authProvider: 'twitter'
+      appName: 'WordBin'
     },
 
     dev: {

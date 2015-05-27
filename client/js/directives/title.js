@@ -1,21 +1,31 @@
 (function () {
   'use strict';
 
-  function titleDirective($rootScope, $state, $interpolate, config) {
-    var expr = $interpolate('{{ title }} - {{ app }}');
+  function titleDirective($rootScope, $timeout, $interpolate, config) {
+    var titleExpr = $interpolate('{{ title }} - {{ app }}');
 
     function handleStateChange(e, toState) {
       /*jshint validthis:true*/
 
-      var titleText;
+      var self = this;
 
-      if (toState.data && toState.data.meta) {
-        titleText = expr(angular.extend({}, toState.data.meta, {
-          app: config.appName
-        }));
-      }
+      $timeout(function () {
+        var titleText;
 
-      this.text(titleText || config.appName);
+        try {
+
+          titleText = titleExpr(angular.extend({}, toState.data.meta, {
+            app: config.appName
+          }));
+
+        } catch (err) {
+
+          titleText = config.appName;
+
+        }
+
+        self.text(titleText);
+      });
     }
 
     return {
@@ -29,7 +39,7 @@
 
   titleDirective.$inject = [
     '$rootScope',
-    '$state',
+    '$timeout',
     '$interpolate',
     'config'
   ];

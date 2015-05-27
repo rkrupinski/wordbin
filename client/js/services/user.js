@@ -43,24 +43,21 @@
 
       }(),
 
-      get: function (/* username */) {
+      get: function (username) {
         var defer = $q.defer();
 
-        // TODO:
-        // * Index on username
-        // * Priority
-        // * http://jsfiddle.net/katowulf/HLUc5/
-        defer.resolve();
+        usersRef()
 
-        return defer.promise;
-      },
+            .orderByChild('username')
+            .equalTo(username)
+            .limitToFirst(1)
+            .once('value', function (snap) {
+              var data = snap.val();
 
-      exists: function (uid) {
-        var defer = $q.defer();
-
-        userRef(uid).once('value', function (snap) {
-          defer.resolve(!!snap.val());
-        });
+              defer.resolve(data ? data[Object.keys(data)[0]] : data);
+            }, function (err) {
+              defer.reject(err);
+            });
 
         return defer.promise;
       },
@@ -68,12 +65,14 @@
       create: function (authData) {
         var ref = userRef(authData.uid),
             defer = $q.defer(),
+            username,
             data;
 
         try {
 
+          username = authData.twitter.username;
+
           data = {
-            username: authData.twitter.username,
             name: authData.twitter.displayName,
             image: authData.twitter.cachedUserProfile.profile_image_url,
             description: authData.twitter.cachedUserProfile.description
@@ -90,7 +89,7 @@
             defer.reject(err);
           }
 
-          ref.child('username').setPriority(10, function (err) {
+          ref.child('username').setWithPriority(username, 1000, function (err) {
             if (err) {
               defer.reject(err);
             }

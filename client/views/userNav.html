@@ -16,7 +16,7 @@
     </a>
     <ul class="dropdown-menu" role="menu">
       <li>
-        <a href="#">Profile</a>
+        <a ui-sref="app.profile({ username: ctrl.userData.username })">Profile</a>
       </li>
       <li>
         <a href="#" ng-click="ctrl.logout($event)" role="button">Logout</a>
