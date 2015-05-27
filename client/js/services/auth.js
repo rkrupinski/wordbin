@@ -1,21 +1,21 @@
 (function () {
   'use strict';
 
-  function auth($state, authObj, user, config) {
+  function auth($state, authObj, user) {
 
     return {
 
       login: function login() {
 
-        return authObj.$authWithOAuthPopup(config.authProvider)
+        return authObj.$authWithOAuthPopup('twitter')
 
             .then(function () {
               var authData = authObj.$getAuth();
 
-              user.exists(authData.uid)
+              user.get(authData.twitter.username)
 
-                  .then(function (exists) {
-                    if (!exists) {
+                  .then(function (data) {
+                    if (!data) {
                       return user.create(authData);
                     }
                   })
@@ -46,12 +46,11 @@
   auth.$inject = [
     '$state',
     'authObj',
-    'user',
-    'config'
+    'user'
   ];
 
-  angular.module('wordbin')
+  angular.module('wordbin.services')
 
-    .factory('auth', auth);
+      .factory('auth', auth);
 
 }());

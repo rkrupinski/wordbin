@@ -1,0 +1,53 @@
+<form class="entry-form" name="entry_form" ng-submit="ctrl.postEntry($event)">
+
+  <div class="modal-header">
+
+    <button
+        class="close"
+        type="button"
+        data-dismiss="modal"
+        aria-label="Close"
+        ng-click="ctrl.cancel()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+
+    <h4 class="modal-title">New entry</h4>
+
+  </div>
+
+  <div class="modal-body">
+
+    <div class="entry">
+      <div class="entry__avatar">
+        <avatar width="48" height="48" data="ctrl.userData"></avatar>
+      </div>
+      <div class="entry__body">
+        <label class="sr-only" for="entry_body">What's on your mind?</label>
+        <textarea
+          id="entry_body"
+          class="form-control"
+          name="entry_body"
+          placeholder="What's on your mind?"
+          required
+          ng-maxlength="200"
+          ng-model="ctrl.entry.body">
+        </textarea>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="modal-footer">
+
+    <char-counter limit="200" field="entry_form.entry_body"></char-counter>
+
+    <button
+        class="btn btn-primary"
+        type="submit"
+        ng-disabled="entry_form.$invalid">
+      Post entry
+    </button>
+
+  </div>
+
+</form>
