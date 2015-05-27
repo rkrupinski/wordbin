@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  function user($q, usersRef, userRef, authObj) {
+  function user($q, $injector, usersRef, userRef, authObj) {
 
     return {
 
@@ -24,22 +24,18 @@
               break;
 
             default:
-              ret = loadUser(authData);
+              try {
+                ret = $injector.get('user').get(authData.twitter.username);
+              } catch (err) {
+                ret = $q.reject(err);
+              }
+
               break;
+
           }
 
           return ret;
         };
-
-        function loadUser(data) {
-          var defer = $q.defer();
-
-          userRef(data.uid).once('value', function (snap) {
-            defer.resolve(cachedUser = snap.val());
-          });
-
-          return defer.promise;
-        }
 
       }(),
 
@@ -106,6 +102,7 @@
 
   user.$inject = [
     '$q',
+    '$injector',
     'usersRef',
     'userRef',
     'authObj'
