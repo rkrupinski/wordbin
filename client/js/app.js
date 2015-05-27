@@ -38,6 +38,10 @@
   function routesConfig($stateProvider, $urlRouterProvider) {
     $urlRouterProvider
 
+      .when('/', '/app/home')
+      .when('/app', '/app/home')
+      .when('/app/', '/app/home')
+
       .otherwise('/404');
 
     $stateProvider
