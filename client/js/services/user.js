@@ -14,24 +14,35 @@
               ret;
 
           switch (true) {
-
             case !authData:
+              console.log('No auth');
               ret = $q.reject();
               break;
 
             case !!cachedUser:
+              console.log('Cached user');
               ret = $q.when(cachedUser);
               break;
 
             default:
               try {
-                ret = $injector.get('user').get(authData.twitter.username);
+
+                // Circular dependency -> $injector
+                ret = $injector.get('user')
+
+                    .get(authData.twitter.username)
+                    .then(function (data) {
+                      cachedUser = data;
+
+                      return data;
+                    });
+
               } catch (err) {
+
                 ret = $q.reject(err);
+
               }
-
               break;
-
           }
 
           return ret;
@@ -40,20 +51,31 @@
       }(),
 
       get: function (username) {
-        var defer = $q.defer();
+        var defer = $q.defer(),
+            ref;
 
-        usersRef()
+        ref = usersRef()
 
             .orderByChild('username')
             .equalTo(username)
-            .limitToFirst(1)
-            .once('value', function (snap) {
-              var data = snap.val();
+            .limitToFirst(1);
 
-              defer.resolve(data ? data[Object.keys(data)[0]] : data);
-            }, function (err) {
-              defer.reject(err);
-            });
+        ref.once('value', function (snap) {
+          var data = snap.val();
+
+          if (!data) {
+            // User not found
+            return defer.resolve(data);
+          }
+
+          ref.once('child_added', function (snap) {
+            defer.resolve(snap.val());
+          }, function (err) {
+            defer.reject(err);
+          });
+        }, function (err) {
+          defer.reject(err);
+        });
 
         return defer.promise;
       },

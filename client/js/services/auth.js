@@ -16,12 +16,8 @@
 
                   .then(function (data) {
                     if (!data) {
-                      console.log('Does not exist. Creating user.');
-
                       return user.create(authData);
                     }
-
-                    console.log('Exists');
                   })
 
                   .catch(function () {
