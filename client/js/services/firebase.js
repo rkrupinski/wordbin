@@ -9,6 +9,6 @@
 
   angular.module('wordbin.services')
 
-      .factory('firebase', firebase);
+      .factory('Firebase', firebase);
 
 }());

@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  function entry($q, firebase, authObj, user, entriesRef, userRef) {
+  function entry($q, Firebase, authObj, user, entriesRef, userRef) {
 
     return {
 
@@ -19,7 +19,7 @@
 
         ref.set(angular.extend({}, data, {
           author: authData.uid,
-          timestamp: firebase.ServerValue.TIMESTAMP
+          timestamp: Firebase.ServerValue.TIMESTAMP
         }), function (err) {
           if (err) {
             return defer.reject(err);
@@ -44,7 +44,7 @@
 
   entry.$inject = [
     '$q',
-    'firebase',
+    'Firebase',
     'authObj',
     'user',
     'entriesRef',
