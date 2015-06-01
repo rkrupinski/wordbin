@@ -16,7 +16,7 @@
   <!-- endbuild -->
 </head>
 <body>
-  <ui-view></ui-view>
+  <div class="app" ui-view></div>
 
   <!-- build:js({client,node_modules}) js/vendor.js -->
   <!-- bower:js -->
@@ -30,7 +30,8 @@
   <!-- endbower -->
   <!-- endbuild -->
   
-  <!-- build:js(client) js/app.js -->
+  <!-- build:js({.tmp,client}) js/app.js -->
+  <script src="templates/templates.js"></script>
   <script src="js/app.js"></script>
 
   <script src="js/controllers/home.js"></script>
@@ -57,6 +58,8 @@
   <script src="js/directives/entryWidget.js"></script>
   <script src="js/directives/charCounter.js"></script>
   <script src="js/directives/avatar.js"></script>
+  <script src="js/directives/entry.js"></script>
+  <script src="js/directives/loader.js"></script>
   <!-- endbuild -->
 </body>
 </html>

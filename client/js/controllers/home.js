@@ -1,11 +1,16 @@
 (function () {
   'use strict';
 
-  function HomeCtrl() {
+  function HomeCtrl($firebaseArray, entriesRef) {
+    var entries = entriesRef().orderByChild('timestamp');
 
+    this.entries = $firebaseArray(entries);
   }
 
-  HomeCtrl.$inject = [];
+  HomeCtrl.$inject = [
+    '$firebaseArray',
+    'entriesRef'
+  ];
 
   angular.module('wordbin.controllers')
 

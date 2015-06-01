@@ -26,15 +26,7 @@
     return {
       restrict: 'E',
       replace: true,
-      template: [
-        '<div class="char-counter">',
-          'Characters remaining: ',
-          '<span class="char-counter__left" ng-class="',
-              '{ \'char-counter__left--alert\': ctrl.charsLeft < 10 }">',
-            '{{ ctrl.charsLeft }}',
-          '</span>',
-        '</div>'
-      ].join(''),
+      templateUrl: 'views/charCounter.html',
       scope: {
         field: '=',
         limit: '@'

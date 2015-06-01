@@ -14,6 +14,7 @@
         'firebase',
         'wordbin.controllers',
         'wordbin.directives',
+        'wordbin.templates',
         'wordbin.services',
         'wordbin.filters'
       ])

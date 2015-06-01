@@ -37,6 +37,10 @@ module.exports = function (app) {
     app.use(express.static(path.join(config.root,
         'client/bower_components/bootstrap-sass/assets')));
 
+    // Serve dummy templates.js
+    app.use('/templates/templates.js',
+        require('../modules/dummyTemplates'));
+
     app.set('appPath', path.join(config.root, 'client'));
     app.locals.pretty = true;
     app.use(morgan('dev'));

@@ -1,0 +1,9 @@
+.loader {
+  @include cover;
+
+  background-color: #fff;
+
+  &__caption {
+    @include center;
+  }
+}

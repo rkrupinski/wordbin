@@ -1,0 +1,14 @@
+.entries {
+
+  &__item {
+    padding-bottom: 2em;
+    margin-bottom: 2em;
+    border-bottom: 1px solid $gray-lighter;
+
+    &:last-child {
+      padding: 0;
+      margin: 0;
+      border: 0;
+    }
+  }
+}
