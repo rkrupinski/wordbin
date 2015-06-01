@@ -1,9 +1,10 @@
 .entries {
+  margin: 3em 0;
 
   &__item {
-    padding-bottom: 2em;
-    margin-bottom: 2em;
-    border-bottom: 1px solid $gray-lighter;
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+    border-bottom: 1px dotted $gray-lighter;
 
     &:last-child {
       padding: 0;

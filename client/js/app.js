@@ -67,8 +67,8 @@
           url: '/home',
           views: {
             '': {
-              controller: 'HomeCtrl as ctrl',
-              templateUrl: 'views/home.html'
+              templateUrl: 'views/home.html',
+              controller: 'HomeCtrl as ctrl'
             }
           },
           data: {
@@ -82,8 +82,8 @@
           url: '/profile/{username}',
           views: {
             '': {
-              controller: 'ProfileCtrl as ctrl',
-              templateUrl: 'views/profile.html'
+              templateUrl: 'views/profile.html',
+              controller: 'ProfileCtrl as ctrl'
             }
           },
           data: {
@@ -96,7 +96,7 @@
               'user',
               '$stateParams',
               function (user, $stateParams) {
-                return user.get($stateParams.username);
+                return user.byUsername($stateParams.username);
               }
             ]
           },
@@ -111,6 +111,45 @@
               $state.transition.then(function (toState) {
                 angular.extend(toState.data.meta, {
                   title: userData.name
+                });
+              });
+            }
+          ]
+        })
+
+        .state('app.entry', {
+          url: '/entry/{entryId}',
+          views: {
+            '': {
+              templateUrl: 'views/entryPage.html',
+              controller: 'EntryPageCtrl as ctrl'
+            }
+          },
+          data: {
+            meta: {
+
+            }
+          },
+          resolve: {
+            entryData: [
+              'entry',
+              '$stateParams',
+              function (entry, $stateParams) {
+                return entry.byId($stateParams.entryId);
+              }
+            ]
+          },
+          onEnter: [
+            '$state',
+            'entryData',
+            function ($state, entryData) {
+              if (!entryData.data) {
+                return $state.go('404');
+              }
+
+              $state.transition.then(function (toState) {
+                angular.extend(toState.data.meta, {
+                  title: 'Entry by ' + entryData.author.name
                 });
               });
             }

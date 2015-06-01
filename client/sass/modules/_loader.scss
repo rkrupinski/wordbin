@@ -1,9 +1,5 @@
 .loader {
   @include cover;
 
-  background-color: #fff;
-
-  &__caption {
-    @include center;
-  }
+  background: #fff url(/images/loader.gif) no-repeat 50% 50%;
 }

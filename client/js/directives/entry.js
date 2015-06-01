@@ -1,39 +1,52 @@
 (function () {
   'use strict';
 
-  function EntryCtrl($q, userRef) {
-    var self = this;
+  function EntryCtrl($scope, $q, user, like, comments) {
+    var self = this,
+        watcher;
 
     this._q = $q;
-    this._userRef = userRef;
+    this._user = user;
+    this._like = like;
+    this._comments = comments;
 
     this.loading = true;
 
-    this._loadUserData(this.entry.author)
+    watcher = $scope.$watch(function () {
+      return !!self.entry;
+    }, function (val) {
+      if (!val) {
+        return;
+      }
 
-        .then(function (data) {
-          self.author = data;
-          self.loading = false;
-        });
+      watcher();
+      self._init();
+    });
   }
 
-  EntryCtrl.prototype._loadUserData = function (uid) {
-    var defer = this._q.defer();
+  EntryCtrl.prototype._init = function () {
+    var self = this;
 
-    this._userRef(uid)
+    this._q.all([
+      this._user.byUid(this.entry.author),
+      this._like.count(this.entry.$id),
+      this._comments.count(this.entry.$id)
+    ])
 
-        .once('value', function (snap) {
-          defer.resolve(snap.val());
-        }, function (err) {
-          defer.reject(err);
+        .then(function (data) {
+          self.author = data[0];
+          self.likeCount = data[1];
+          self.commentsCount = data[2];
+          self.loading = false;
         });
-
-    return defer.promise;
   };
 
   EntryCtrl.$inject = [
+    '$scope',
     '$q',
-    'userRef'
+    'user',
+    'like',
+    'comments'
   ];
 
   function entry() {
@@ -43,7 +56,8 @@
       replace: true,
       templateUrl: 'views/entry.html',
       scope: {
-        entry: '=data'
+        entry: '=data',
+        full: '='
       },
       controller: EntryCtrl,
       controllerAs: 'ctrl',

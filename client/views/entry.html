@@ -13,7 +13,22 @@
     {{ ctrl.entry.body }}
   </div>
 
-  <span class="glyphicon glyphicon-remove"></span>
+  <div ng-if="!ctrl.full" class="entry__actions">
+    <like-btn entry-id="ctrl.entry.$id"></like-btn>
+
+    <a class="btn btn-default btn-sm"
+        ui-sref="app.entry({ entryId: ctrl.entry.$id })">
+      <span class="glyphicon glyphicon-comment"></span>
+      {{ ctrl.commentsCount }}
+    </a>
+
+    <a class="btn btn-link btn-sm"
+        ui-sref="app.entry({ entryId: ctrl.entry.$id })">Details</a>
+  </div>
+
+  <div ng-if="ctrl.full" class="entry__actions">
+    <like-btn entry-id="ctrl.entry.$id"></like-btn>
+  </div>
 
   <loader ng-if="ctrl.loading"></loader>
 </div>

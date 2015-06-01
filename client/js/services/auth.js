@@ -12,7 +12,7 @@
             .then(function () {
               var authData = authObj.$getAuth();
 
-              user.get(authData.twitter.username)
+              user.byUsername(authData.twitter.username)
 
                   .then(function (data) {
                     if (!data) {

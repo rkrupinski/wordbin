@@ -1,0 +1,7 @@
+<button class="btn btn-default btn-sm"
+    ng-disabled="ctrl.isAuthor || ctrl.likes || !ctrl.isLoggedIn"
+    ng-click="ctrl.like()">
+  <span class="glyphicon glyphicon-heart"></span>
+  {{ ctrl.likeCount }}
+  </span>
+</button>
