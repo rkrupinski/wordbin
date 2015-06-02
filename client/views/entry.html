@@ -6,7 +6,8 @@
 
   <div class="entry__meta">
     <a ui-sref="app.profile({ username: ctrl.author.username })">{{ ctrl.author.name }}</a>,
-    <time>{{ ctrl.entry.timestamp | date:'MMM d, y h:mm' }}</time>
+    <time datetime="{{ ctrl.entry.timestamp | date:'yyyy-MM-ddTHH:mmZ' }}">
+        {{ ctrl.entry.timestamp | date:'MMM d, y H:mm' }}</time>
   </div>
 
   <div class="entry__body">
