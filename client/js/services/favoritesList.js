@@ -1,0 +1,31 @@
+(function () {
+  'use strict';
+
+  function favoritesList($modal) {
+
+    return {
+
+      view: function (entryId) {
+        return $modal.open({
+          templateUrl: 'views/favoritesModal.html',
+          controller: 'FavoritesModalCtrl as ctrl',
+          resolve: {
+            entryId: function () {
+              return entryId;
+            }
+          }
+        }).result;
+      }
+
+    };
+  }
+
+  favoritesList.$inject = [
+    '$modal'
+  ];
+
+  angular.module('wordbin.services')
+
+      .factory('favoritesList', favoritesList);
+
+}());
