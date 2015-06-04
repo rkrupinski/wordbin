@@ -2,39 +2,41 @@
   'use strict';
 
   function entry($q, Firebase, authObj, user, entriesRef, entryRef, userRef) {
-    var authData = authObj.$getAuth();
 
     return {
 
       create: function (data) {
-        var defer,
+        var defer = $q.defer(),
             ref;
 
-        if (!authData) {
-          return $q.reject();
-        }
+        authObj.$waitForAuth()
 
-        defer = $q.defer();
-        ref = entriesRef().push();
-
-        ref.set(angular.extend({}, data, {
-          author: authData.uid,
-          timestamp: Firebase.ServerValue.TIMESTAMP
-        }), function (err) {
-          if (err) {
-            return defer.reject(err);
-          }
-
-          userRef(authData.uid).child('entries/' + ref.key())
-
-            .set(true, function (err) {
-              if (err) {
-                return defer.reject(err);
+            .then(function (authData) {
+              if (!authData) {
+                return defer.reject();
               }
 
-              defer.resolve();
+              ref = entriesRef().push();
+
+              ref.set(angular.extend({}, data, {
+                author: authData.uid,
+                timestamp: Firebase.ServerValue.TIMESTAMP
+              }), function (err) {
+                if (err) {
+                  return defer.reject(err);
+                }
+
+                userRef(authData.uid).child('entries/' + ref.key())
+
+                  .set(true, function (err) {
+                    if (err) {
+                      return defer.reject(err);
+                    }
+
+                    defer.resolve();
+                  });
+              });
             });
-        });
 
         return defer.promise;
       },
@@ -69,19 +71,21 @@
       },
 
       isAuthor: function (entryId) {
-        var defer;
+        var defer = $q.defer();
 
-        if (!authData) {
-          return $q.reject();
-        }
+        authObj.$waitForAuth()
 
-        defer = $q.defer();
+            .then(function (authData) {
+              if (!authData) {
+                return defer.resolve(null);
+              }
 
-        entryRef(entryId).once('value', function (snap) {
-          defer.resolve(snap.val().author === authData.uid);
-        }, function (err) {
-          defer.reject(err);
-        });
+              entryRef(entryId).once('value', function (snap) {
+                defer.resolve(snap.val().author === authData.uid);
+              }, function (err) {
+                defer.reject(err);
+              });
+            });
 
         return defer.promise;
       }

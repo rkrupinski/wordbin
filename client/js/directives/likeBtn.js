@@ -2,27 +2,30 @@
   'use strict';
 
   function LikeBtnCtrl($q, like, entry, auth) {
-    var self = this;
+    this._q = $q;
+    this._like = like;
+    this._entry = entry;
 
-    this.likeCount = 0;
-    this.likes = true;
-    this.isAuthor = true;
     this.isLoggedIn = auth.isLoggedIn();
 
-    this._like = like;
+    this._fetchData();
+  }
 
-    $q.all([
-      like.count(this.entryId),
-      like.likes(this.entryId),
-      entry.isAuthor(this.entryId)
+  LikeBtnCtrl.prototype._fetchData = function () {
+    var self = this;
+
+    this._q.all([
+      this._like.count(this.entryId),
+      this._like.likes(this.entryId),
+      this._entry.isAuthor(this.entryId)
     ])
 
         .then(function (data) {
-          self.likeCount = data[0];
+          self.likeCount = data[0] || 0;
           self.likes = data[1];
           self.isAuthor = data[2];
         });
-  }
+  };
 
   LikeBtnCtrl.prototype.like = function () {
     var self = this;
@@ -33,6 +36,10 @@
           self.likes = true;
           self.likeCount++;
         });
+  };
+
+  LikeBtnCtrl.prototype.isActive = function () {
+    return this.isLoggedIn && !this.isAuthor && !this.likes;
   };
 
   LikeBtnCtrl.$inject = [

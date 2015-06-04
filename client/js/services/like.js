@@ -2,7 +2,6 @@
   'use strict';
 
   function like($q, entryRef, userRef, authObj) {
-    var authData = authObj.$getAuth();
 
     return {
 
@@ -21,29 +20,31 @@
       },
 
       like: function (entryId) {
-        var defer;
+        var defer = $q.defer();
 
-        if (!authData) {
-          return $q.reject();
-        }
+        authObj.$waitForAuth()
 
-        defer = $q.defer();
-
-        entryRef(entryId).child('like/' + authData.uid)
-
-            .set(true, function (err) {
-              if (err) {
-                return defer.reject(err);
+            .then(function (authData) {
+              if (!authData) {
+                return defer.reject();
               }
 
-              userRef(authData.uid).child('like/' + entryId)
+              entryRef(entryId).child('like/' + authData.uid)
 
                   .set(true, function (err) {
                     if (err) {
                       return defer.reject(err);
                     }
 
-                    defer.resolve();
+                    userRef(authData.uid).child('like/' + entryId)
+
+                        .set(true, function (err) {
+                          if (err) {
+                            return defer.reject(err);
+                          }
+
+                          defer.resolve();
+                        });
                   });
             });
 
@@ -51,20 +52,23 @@
       },
 
       likes: function (entryId) {
-        var defer;
+        var defer = $q.defer();
 
-        if (!authData) {
-          return $q.reject();
-        }
+        authObj.$waitForAuth()
 
-        defer = $q.defer();
+            .then(function (authData) {
+              if (!authData) {
+                return defer.resolve(null);
+              }
 
-        entryRef(entryId).child('like/' + authData.uid)
+              entryRef(entryId).child('like/' + authData.uid)
 
-            .once('value', function (snap) {
-              defer.resolve(!!snap.val());
-            }, function (err) {
-              defer.reject(err);
+                  .once('value', function (snap) {
+                    defer.resolve(!!snap.val());
+                  }, function (err) {
+                    defer.reject(err);
+                  });
+
             });
 
         return defer.promise;

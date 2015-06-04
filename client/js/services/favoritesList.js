@@ -9,6 +9,7 @@
         return $modal.open({
           templateUrl: 'views/favoritesModal.html',
           controller: 'FavoritesModalCtrl as ctrl',
+          size: 'sm',
           resolve: {
             entryId: function () {
               return entryId;
