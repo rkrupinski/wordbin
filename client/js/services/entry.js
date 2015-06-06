@@ -1,7 +1,8 @@
 (function () {
   'use strict';
 
-  function entry($q, Firebase, authObj, user, entriesRef, entryRef, userRef) {
+  function entry($q, Firebase, auth, user, entriesRef,
+      entryRef, userRef) {
 
     return {
 
@@ -9,7 +10,7 @@
         var defer = $q.defer(),
             ref;
 
-        authObj.$waitForAuth()
+        auth.waitForAuth()
 
             .then(function (authData) {
               if (!authData) {
@@ -37,6 +38,31 @@
                   });
               });
             });
+
+        return defer.promise;
+      },
+
+      remove: function (entryId) {
+        var defer = $q.defer();
+
+        auth.waitForAuth().then(function (authData) {
+          if (!authData) {
+            return defer.reject();
+          }
+
+          entryRef(entryId).remove(function (err) {
+            if (err) {
+              return defer.reject(err);
+            }
+
+            userRef(authData.uid).child('entries/' + entryId)
+
+                .remove(function () {
+                  // Ignore error here
+                  defer.resolve();
+                });
+          });
+        });
 
         return defer.promise;
       },
@@ -73,7 +99,7 @@
       isAuthor: function (entryId) {
         var defer = $q.defer();
 
-        authObj.$waitForAuth()
+        auth.waitForAuth()
 
             .then(function (authData) {
               if (!authData) {
@@ -96,7 +122,7 @@
   entry.$inject = [
     '$q',
     'Firebase',
-    'authObj',
+    'auth',
     'user',
     'entriesRef',
     'entryRef',

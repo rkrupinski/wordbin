@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  function like($q, entryRef, userRef, authObj) {
+  function like($q, entryRef, userRef, auth) {
 
     return {
 
@@ -22,7 +22,7 @@
       like: function (entryId) {
         var defer = $q.defer();
 
-        authObj.$waitForAuth()
+        auth.waitForAuth()
 
             .then(function (authData) {
               if (!authData) {
@@ -54,7 +54,7 @@
       likes: function (entryId) {
         var defer = $q.defer();
 
-        authObj.$waitForAuth()
+        auth.waitForAuth()
 
             .then(function (authData) {
               if (!authData) {
@@ -81,7 +81,7 @@
     '$q',
     'entryRef',
     'userRef',
-    'authObj'
+    'auth'
   ];
 
   angular.module('wordbin.services')

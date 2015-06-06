@@ -1,12 +1,12 @@
 (function () {
   'use strict';
 
-  function user($q, $injector, usersRef, userRef, authObj) {
+  function user($q, $injector, usersRef, userRef) {
 
     return {
 
       current: function () {
-        var authData = authObj.$getAuth();
+        var authData = $injector.get('auth').getAuth();
 
         return !authData ? $q.reject() : $injector.get('user')
 
@@ -101,8 +101,7 @@
     '$q',
     '$injector',
     'usersRef',
-    'userRef',
-    'authObj'
+    'userRef'
   ];
 
   angular.module('wordbin.services')

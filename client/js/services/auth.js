@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  function auth($state, authObj, user) {
+  function auth($injector, $state, authObj, user) {
 
     return {
 
@@ -10,7 +10,7 @@
         return authObj.$authWithOAuthPopup('twitter')
 
             .then(function () {
-              var authData = authObj.$getAuth();
+              var authData = $injector.get('auth').getAuth();
 
               user.byUsername(authData.twitter.username)
 
@@ -38,12 +38,21 @@
 
       isLoggedIn: function isLoggedIn() {
         return !!authObj.$getAuth();
+      },
+
+      getAuth: function getAuth() {
+        return authObj.$getAuth();
+      },
+
+      waitForAuth: function waitForAuth() {
+        return authObj.$waitForAuth();
       }
 
     };
   }
 
   auth.$inject = [
+    '$injector',
     '$state',
     'authObj',
     'user'
