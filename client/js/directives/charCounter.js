@@ -27,13 +27,13 @@
       restrict: 'E',
       replace: true,
       templateUrl: 'views/charCounter.html',
-      scope: {
-        field: '=',
-        limit: '@'
-      },
+      scope: {},
       controller: CharCounterCtrl,
       controllerAs: 'ctrl',
-      bindToController: true
+      bindToController: {
+        field: '=',
+        limit: '@'
+      }
     };
   }
 
