@@ -18,6 +18,8 @@
 <body>
   <div class="app" ui-view></div>
 
+  <loader class="loader--global" global-loader></loader>
+
   <!-- build:js({client,node_modules}) js/vendor.js -->
   <!-- bower:js -->
   <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -59,6 +61,7 @@
   <script src="js/services/favoritesList.js"></script>
 
   <script src="js/directives/title.js"></script>
+  <script src="js/directives/globalLoader.js"></script>
   <script src="js/directives/userNav.js"></script>
   <script src="js/directives/entryWidget.js"></script>
   <script src="js/directives/charCounter.js"></script>
