@@ -1,56 +1,19 @@
 (function () {
   'use strict';
 
-  function user($q, $injector, usersRef, userRef, authObj) {
+  function user($q, $injector, usersRef, userRef) {
 
     return {
 
       current: function () {
+        var authData = $injector.get('auth').getAuth();
 
-        var cachedUser;
+        return !authData ? $q.reject() : $injector.get('user')
 
-        return function () {
-          var authData = authObj.$getAuth(),
-              ret;
+            .byUid(authData.uid);
+      },
 
-          switch (true) {
-            case !authData:
-              console.log('No auth');
-              ret = $q.reject();
-              break;
-
-            case !!cachedUser:
-              console.log('Cached user');
-              ret = $q.when(cachedUser);
-              break;
-
-            default:
-              try {
-
-                // Circular dependency -> $injector
-                ret = $injector.get('user')
-
-                    .get(authData.twitter.username)
-                    .then(function (data) {
-                      cachedUser = data;
-
-                      return data;
-                    });
-
-              } catch (err) {
-
-                ret = $q.reject(err);
-
-              }
-              break;
-          }
-
-          return ret;
-        };
-
-      }(),
-
-      get: function (username) {
+      byUsername: function (username) {
         var defer = $q.defer(),
             ref;
 
@@ -73,6 +36,18 @@
           }, function (err) {
             defer.reject(err);
           });
+        }, function (err) {
+          defer.reject(err);
+        });
+
+        return defer.promise;
+      },
+
+      byUid: function (uid) {
+        var defer = $q.defer();
+
+        userRef(uid).once('value', function (snap) {
+          defer.resolve(snap.val());
         }, function (err) {
           defer.reject(err);
         });
@@ -126,8 +101,7 @@
     '$q',
     '$injector',
     'usersRef',
-    'userRef',
-    'authObj'
+    'userRef'
   ];
 
   angular.module('wordbin.services')

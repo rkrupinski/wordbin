@@ -26,22 +26,14 @@
     return {
       restrict: 'E',
       replace: true,
-      template: [
-        '<div class="char-counter">',
-          'Characters remaining: ',
-          '<span class="char-counter__left" ng-class="',
-              '{ \'char-counter__left--alert\': ctrl.charsLeft < 10 }">',
-            '{{ ctrl.charsLeft }}',
-          '</span>',
-        '</div>'
-      ].join(''),
-      scope: {
-        field: '=',
-        limit: '@'
-      },
+      templateUrl: 'views/charCounter.html',
+      scope: {},
       controller: CharCounterCtrl,
       controllerAs: 'ctrl',
-      bindToController: true
+      bindToController: {
+        field: '=',
+        limit: '@'
+      }
     };
   }
 

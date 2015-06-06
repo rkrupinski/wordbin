@@ -2,6 +2,7 @@ wordbin
 =======
 
 TODO:
+* Global loader
 * Global error queue
-* Angular 1.4?
+* Confirm modal (deleting stuff)
 * `<meta name="description" content="">`

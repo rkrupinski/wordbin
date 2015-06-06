@@ -1,0 +1,7 @@
+.entries {
+  margin: 3em 0;
+
+  &__item {
+    @extend %list-item;
+  }
+}

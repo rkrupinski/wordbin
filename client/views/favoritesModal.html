@@ -1,0 +1,35 @@
+<form class="entry-form" name="" ng-submit="">
+
+  <div class="modal-header">
+
+    <button
+        class="close"
+        type="button"
+        data-dismiss="modal"
+        aria-label="Close"
+        ng-click="$dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+
+    <h4 class="modal-title">Favorites</h4>
+
+  </div>
+
+  <div class="modal-body">
+
+    <div class="users">
+
+      <div class="users__item" ng-repeat="user in ctrl.favorites">
+        <user-widget uid="user.$id"></user-widget>
+      </div>
+
+      <p ng-if="!ctrl.favorites || !ctrl.favorites.length"
+          class="text-center">Nobody likes this entry yet ;(</p>
+
+      <loader ng-if="ctrl.loading"></loader>
+
+    </div>
+
+  </div>
+
+</form>

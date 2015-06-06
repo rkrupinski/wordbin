@@ -9,7 +9,28 @@
     top: 0;
   }
 
+  &__meta {
+    word-wrap: break-word;
+  }
+
   &__body {
+    margin-bottom: .75em;
+    font-size: 1.5em;
+    word-wrap: break-word;
+  }
+
+  &__actions {
+
+    .btn {
+      margin-right: .5em;
+    }
+
+    .dropdown {
+      display: inline-block;
+    }
+  }
+
+  &__input {
 
     textarea {
       height: 6em;

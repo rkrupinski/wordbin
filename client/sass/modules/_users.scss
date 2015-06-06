@@ -1,0 +1,6 @@
+.users {
+
+  &__item {
+    @extend %list-item;
+  }
+}

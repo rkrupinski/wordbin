@@ -1,0 +1,13 @@
+<div class="user" ng-if="!ctrl.errored">
+
+  <avatar class="user__avatar" width="48" height="48" data="ctrl.data"></avatar>
+
+  <div class="user__name">
+    <a ui-sref="app.profile({ username: ctrl.data.username })">{{ ctrl.data.name }}</a>
+  </div>
+  
+  <div class="user__description">{{ ctrl.data.description }}</div>
+
+  <loader ng-if="ctrl.loading"></loader>
+
+</div>

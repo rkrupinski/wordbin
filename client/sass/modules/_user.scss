@@ -1,0 +1,21 @@
+.user {
+  min-height: 4em;
+  position: relative;
+  padding-left: 4em;
+
+  &__avatar {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  &__name {
+    word-wrap: break-word;
+  }
+
+  &__description {
+    @extend %ellipsis;
+
+    color: $gray-light;
+  }
+}

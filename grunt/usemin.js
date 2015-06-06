@@ -14,7 +14,13 @@ module.exports = function (grunt) {
       assetsDirs: [
         '<%= directories.dist %>/public',
         '<%= directories.dist %>/public/images'
-      ]
+      ],
+      patterns: {
+        js: [
+          [/(images\/.*?\.(?:png|jpg|svg|gif))/gm,
+              'Updating image urls in scripts']
+        ]
+      }
     },
     html: ['<%= directories.dist %>/public/**/*.html'],
     css: ['<%= directories.dist %>/public/**/*.css'],

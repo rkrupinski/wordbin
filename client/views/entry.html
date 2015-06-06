@@ -1,0 +1,53 @@
+<div class="entry">
+
+  <div class="entry__avatar">
+    <avatar width="48" height="48" data="ctrl.author"></avatar>
+  </div>
+
+  <div class="entry__meta">
+    <a ui-sref="app.profile({ username: ctrl.author.username })">{{ ctrl.author.name }}</a>,
+    <time datetime="{{ ctrl.entry.timestamp | date:'yyyy-MM-ddTHH:mmZ' }}">
+        {{ ctrl.entry.timestamp | date:'MMM d, y H:mm' }}</time>
+  </div>
+
+  <div class="entry__body">
+    {{ ctrl.entry.body }}
+  </div>
+
+  <div ng-if="!ctrl.full" class="entry__actions">
+    <like-btn entry-id="ctrl.entry.$id"></like-btn>
+
+    <a class="btn btn-default btn-sm"
+        ui-sref="app.entry({ entryId: ctrl.entry.$id })">
+      <span class="glyphicon glyphicon-comment"></span>
+      {{ ctrl.commentsCount }}
+    </a>
+
+    <a class="btn btn-link btn-sm"
+        ui-sref="app.entry({ entryId: ctrl.entry.$id })">Details</a>
+  </div>
+
+  <div ng-if="ctrl.full && !ctrl.loading" class="entry__actions">
+    <like-btn entry-id="ctrl.entry.$id"></like-btn>
+
+    <span class="dropdown">
+      <button class="btn btn-default btn-sm" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+        More
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="#" role="button" favorites="{{ ctrl.entry.$id }}">Favorites</a>
+        </li>
+        <li ng-if="ctrl.isLoggedIn && ctrl.isAuthor">
+          <a href="#" role="button" ng-click="ctrl.deleteEntry()">
+            Delete entry
+          </a>
+        </li>
+      </ul>
+    </span>
+  </div>
+
+  <loader ng-if="ctrl.loading"></loader>
+</div>

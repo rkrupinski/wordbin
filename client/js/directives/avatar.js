@@ -7,7 +7,7 @@
     return {
       restrict: 'E',
       replace: true,
-      template: '<img src="{{ src }}" alt="{{ alt }}">',
+      templateUrl: 'views/avatar.html',
       link: function (scope, element, attrs) {
         var fn = $parse(attrs.data),
             unwatch;

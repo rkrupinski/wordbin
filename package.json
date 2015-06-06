@@ -37,6 +37,7 @@
     "grunt-env": "^0.4.4",
     "grunt-express-server": "^0.4.19",
     "grunt-filerev": "^2.2.0",
+    "grunt-html2js": "^0.3.2",
     "grunt-jscs": "^1.6.0",
     "grunt-newer": "^1.1.0",
     "grunt-open": "^0.2.3",

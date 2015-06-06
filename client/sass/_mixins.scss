@@ -1,5 +1,29 @@
-@mixin center {
+@mixin center($x: true, $y: true) {
+  @if $x or $y {
+    position: absolute;
+
+    @if $x {
+      left: 50%;
+    }
+
+    @if $y {
+      top: 50%;
+    }
+
+    @if $x and $y {
+      transform: translate(-50%, -50%);
+    } @else if $x {
+      transform: translateX(-50%);
+    } @else if $y {
+      transform: translateY(-50%);
+    }
+  }
+}
+
+@mixin cover {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
 }
