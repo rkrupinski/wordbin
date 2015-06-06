@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  function EntryCtrl($q, $state, auth, user, entry) {
+  function EntryCtrl($q, $state, auth, user, entry, through) {
     var self = this;
 
     this._q = $q;
@@ -9,6 +9,7 @@
     this._auth = auth;
     this._user = user;
     this._entry = entry;
+    this._through = through;
 
     this.isLoggedIn = auth.isLoggedIn();
     this.loading = true;
@@ -33,23 +34,27 @@
   EntryCtrl.prototype.deleteEntry = function () {
     var self = this;
 
-    this.loading = true;
-
-    this._entry.remove(this.entry.$id)
+    this._through.confirm('Do you want to delete this entry?')
 
         .then(function () {
-          return self._user.current();
-        })
+          self.loading = true;
 
-        .then(function (authorData) {
-          self._state.go('app.profile', {
-            username: authorData.username
-          });
-        })
+          self._entry.remove(self.entry.$id)
 
-        .catch(function (err) {
-          // TODO
-          console.log(err);
+              .then(function () {
+                return self._user.current();
+              })
+
+              .then(function (authorData) {
+                self._state.go('app.profile', {
+                  username: authorData.username
+                });
+              })
+
+              .catch(function (err) {
+                // TODO
+                console.log(err);
+              });
         });
   };
 
@@ -58,7 +63,8 @@
     '$state',
     'auth',
     'user',
-    'entry'
+    'entry',
+    'through'
   ];
 
   function entry() {
