@@ -17,11 +17,7 @@
   <div ng-if="!ctrl.full" class="entry__actions">
     <like-btn entry-id="ctrl.entry.$id"></like-btn>
 
-    <a class="btn btn-default btn-sm"
-        ui-sref="app.entry({ entryId: ctrl.entry.$id })">
-      <span class="glyphicon glyphicon-comment"></span>
-      {{ ctrl.commentsCount }}
-    </a>
+    <comment-btn entry-id="ctrl.entry.$id"></comment-btn>
 
     <a class="btn btn-link btn-sm"
         ui-sref="app.entry({ entryId: ctrl.entry.$id })">Details</a>
@@ -29,6 +25,8 @@
 
   <div ng-if="ctrl.full && !ctrl.loading" class="entry__actions">
     <like-btn entry-id="ctrl.entry.$id"></like-btn>
+
+    
 
     <span class="dropdown">
       <button class="btn btn-default btn-sm" data-toggle="dropdown"
