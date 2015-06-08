@@ -15,7 +15,8 @@ module.exports = function(grunt) {
     '<%= directories.client %>/views/charCounter.html',
     '<%= directories.client %>/views/entryWidget.html',
     '<%= directories.client %>/views/userNav.html',
-    '<%= directories.client %>/views/loader.html'
+    '<%= directories.client %>/views/loader.html',
+    '<%= directories.client %>/views/globalLoader.html'
   ];
 
   require('time-grunt')(grunt);

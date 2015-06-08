@@ -2,9 +2,10 @@
   @include cover;
 
   background: #fff url(/images/loader.gif) no-repeat 50% 50%;
+}
 
-  &--global {
-    position: fixed;
-    z-index: $zindex-modal + 100;
-  }
+.global-loader {
+  @include center(true, false);
+
+  top: 18px;
 }
