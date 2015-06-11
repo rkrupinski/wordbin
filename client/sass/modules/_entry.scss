@@ -3,6 +3,10 @@
   padding-left: 4.5em;
   position: relative;
 
+  &--full {
+    margin-bottom: 2em;
+  }
+
   &__avatar {
     position: absolute;
     left: 0;
