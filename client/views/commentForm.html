@@ -1,5 +1,18 @@
 <form class="comment-form" name="comment_form" ng-submit="ctrl.postComment($event)" novalidate>
+
   <div class="comment">
-    :)
+    <div class="comment__avatar">
+      <avatar width="25" height="25" data="ctrl.author"></avatar>
+    </div>
+
+    <div class="comment__input">
+      <textarea class="form-control" name="comment_body"
+          ng-model="ctrl.comment.body" placeholder="Type your comment here"></textarea>
+
+    </div>
+
+    <div class="comment__submit">
+      <char-counter limit="200" field="comment_form.comment_body"></char-counter>
+    </div>
   </div>
 </form>

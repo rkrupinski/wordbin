@@ -1,11 +1,34 @@
 (function () {
   'use strict';
 
-  function CommentFormCtrl() {
+  function CommentFormCtrl($q, user) {
+    var self = this;
 
+    this._q = $q;
+    this._user = user;
+
+    this._fetchData()
+
+        .then(function (data) {
+          self.author = data[0];
+        })
+
+        .catch(function (err) {
+          // TODO
+          console.log(err);
+        });
   }
 
-  CommentFormCtrl.$inject = [];
+  CommentFormCtrl.prototype._fetchData = function () {
+    return this._q.all([
+      this._user.current()
+    ]);
+  };
+
+  CommentFormCtrl.$inject = [
+    '$q',
+    'user'
+  ];
 
   function commentForm() {
 
@@ -16,7 +39,9 @@
       scope: {},
       controller: CommentFormCtrl,
       controllerAs: 'ctrl',
-      bindToController: {}
+      bindToController: {
+        entryId: '='
+      }
     };
   }
 

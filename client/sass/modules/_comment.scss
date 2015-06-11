@@ -1,3 +1,23 @@
 .comment {
+  padding-left: 2.5em;
   position: relative;
+
+  &__avatar {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  &__input {
+    margin-bottom: .5em;
+    
+    textarea {
+      height: 4em;
+      resize: vertical;
+    }
+  }
+
+  &__submit {
+
+  }
 }

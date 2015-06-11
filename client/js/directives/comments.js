@@ -16,7 +16,9 @@
       scope: {},
       controller: CommentsCtrl,
       controllerAs: 'ctrl',
-      bindToController: {}
+      bindToController: {
+        entryId: '='
+      }
     };
   }
 
