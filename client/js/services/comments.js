@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  function comments($q, entryRef) {
+  function comments($q, entryRef, auth) {
 
     return {
 
@@ -15,6 +15,20 @@
         });
 
         return defer.promise;
+      },
+
+      create: function () {
+        var defer = $q.defer();
+
+        auth.waitForAuth()
+
+            .then(function (authData) {
+              if (!authData) {
+                return defer.reject();
+              }
+            });
+
+        return defer.promise;
       }
 
     };
@@ -22,7 +36,8 @@
 
   comments.$inject = [
     '$q',
-    'entryRef'
+    'entryRef',
+    'auth'
   ];
 
   angular.module('wordbin.services')
@@ -30,3 +45,41 @@
       .factory('comments', comments);
 
 }());
+
+/*
+create: function (data) {
+  var defer = $q.defer(),
+      ref;
+
+  auth.waitForAuth()
+
+      .then(function (authData) {
+        if (!authData) {
+          return defer.reject();
+        }
+
+        ref = entriesRef().push();
+
+        ref.set(angular.extend({}, data, {
+          author: authData.uid,
+          timestamp: Firebase.ServerValue.TIMESTAMP
+        }), function (err) {
+          if (err) {
+            return defer.reject(err);
+          }
+
+          userRef(authData.uid).child('entries/' + ref.key())
+
+            .set(true, function (err) {
+              if (err) {
+                return defer.reject(err);
+              }
+
+              defer.resolve();
+            });
+        });
+      });
+
+  return defer.promise;
+}
+*/

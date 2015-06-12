@@ -1,11 +1,17 @@
 (function () {
   'use strict';
 
-  function CommentFormCtrl($q, user) {
+  function CommentFormCtrl($q, user, auth) {
     var self = this;
 
     this._q = $q;
     this._user = user;
+
+    this.isLoggedIn = auth.isLoggedIn();
+
+    if (!this.isLoggedIn) {
+      return;
+    }
 
     this._fetchData()
 
@@ -27,7 +33,8 @@
 
   CommentFormCtrl.$inject = [
     '$q',
-    'user'
+    'user',
+    'auth'
   ];
 
   function commentForm() {

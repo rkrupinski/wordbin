@@ -1,7 +1,4 @@
-<div class="char-counter">
-  Characters remaining:
-  <span class="char-counter__left" ng-class="
-      { 'char-counter__left--alert': ctrl.charsLeft < 10 }">
-    {{ ctrl.charsLeft }}
-  </span>
-</div>
+<span class="char-counter text-muted"
+    ng-class="{ 'char-counter--alert': ctrl.charsLeft < 10 }">
+  {{ ctrl.charsLeft }}
+</span>

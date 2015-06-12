@@ -1,4 +1,5 @@
-<form class="comment-form" name="comment_form" ng-submit="ctrl.postComment($event)" novalidate>
+<form class="comment-form" name="comment_form" ng-show="ctrl.isLoggedIn"
+    ng-submit="ctrl.postComment($event)" novalidate>
 
   <div class="comment">
     <div class="comment__avatar">
@@ -6,13 +7,26 @@
     </div>
 
     <div class="comment__input">
-      <textarea class="form-control" name="comment_body"
-          ng-model="ctrl.comment.body" placeholder="Type your comment here"></textarea>
-
+      <label class="sr-only" for="comment_body">Type your comment here</label>
+      <textarea
+          id="comment_body"
+          class="form-control"
+          name="comment_body"
+          placeholder="Type your comment here"
+          ng-model="ctrl.comment.body"
+          required
+          ng-maxlength="200"></textarea>
     </div>
 
     <div class="comment__submit">
       <char-counter limit="200" field="comment_form.comment_body"></char-counter>
+
+      <button
+          class="btn btn-primary btn-sm"
+          type="submit"
+          ng-disabled="comment_form.$invalid">
+        Post comment
+      </button>
     </div>
   </div>
 </form>

@@ -1,7 +1,9 @@
 <div class="entry" ng-class="{ 'entry--full': ctrl.full }">
 
   <div class="entry__avatar">
-    <avatar width="48" height="48" data="ctrl.author"></avatar>
+    <a ui-sref="app.profile({ username: ctrl.author.username })">
+      <avatar width="48" height="48" data="ctrl.author"></avatar>
+    </a>
   </div>
 
   <div class="entry__meta">
