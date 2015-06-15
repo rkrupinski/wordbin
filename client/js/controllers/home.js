@@ -1,15 +1,12 @@
 (function () {
   'use strict';
 
-  function HomeCtrl($firebaseArray, entriesRef) {
-    var entries = entriesRef().orderByChild('timestamp').limitToLast(5);
-
-    this.entries = $firebaseArray(entries);
+  function HomeCtrl(recentEntries) {
+    this.entries = recentEntries;
   }
 
   HomeCtrl.$inject = [
-    '$firebaseArray',
-    'entriesRef'
+    'recentEntries'
   ];
 
   angular.module('wordbin.controllers')
