@@ -1,12 +1,14 @@
 (function () {
   'use strict';
 
-  function CommentFormCtrl($q, user, auth) {
+  function CommentFormCtrl($q, comments, user, auth) {
     var self = this;
 
     this._q = $q;
+    this._comments = comments;
     this._user = user;
 
+    this.disableSubmit = false;
     this.isLoggedIn = auth.isLoggedIn();
 
     if (!this.isLoggedIn) {
@@ -31,8 +33,34 @@
     ]);
   };
 
+  CommentFormCtrl.prototype.postComment = function (e) {
+    var self = this;
+
+    e.preventDefault();
+
+    this.disableSubmit = true;
+
+    this._comments.create(angular.extend({}, this.comment, {
+      target: this.entryId
+    }))
+
+        .then(function () {
+          delete self.comment.body;
+        })
+
+        .catch(function (err) {
+          // TODO
+          console.log(err);
+        })
+
+        .finally(function () {
+          self.disableSubmit = false;
+        });
+  };
+
   CommentFormCtrl.$inject = [
     '$q',
+    'comments',
     'user',
     'auth'
   ];

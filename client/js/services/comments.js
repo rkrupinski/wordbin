@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  function comments($q, entryRef, auth) {
+  function comments($q, entryRef, commentsRef, auth) {
 
     return {
 
@@ -17,8 +17,9 @@
         return defer.promise;
       },
 
-      create: function () {
-        var defer = $q.defer();
+      create: function (data) {
+        var defer = $q.defer(),
+            ref;
 
         auth.waitForAuth()
 
@@ -26,6 +27,27 @@
               if (!authData) {
                 return defer.reject();
               }
+
+              ref = commentsRef().push();
+
+              ref.set(angular.extend({}, data, {
+                author: authData.uid,
+                timestamp: Firebase.ServerValue.TIMESTAMP
+              }), function (err) {
+                if (err) {
+                  return defer.reject(err);
+                }
+
+                entryRef(data.target).child('comments/' + ref.key())
+
+                    .set(true, function (err) {
+                      if (err) {
+                        return defer.reject(err);
+                      }
+
+                      defer.resolve();
+                    });
+              });
             });
 
         return defer.promise;
@@ -37,6 +59,7 @@
   comments.$inject = [
     '$q',
     'entryRef',
+    'commentsRef',
     'auth'
   ];
 
@@ -45,41 +68,3 @@
       .factory('comments', comments);
 
 }());
-
-/*
-create: function (data) {
-  var defer = $q.defer(),
-      ref;
-
-  auth.waitForAuth()
-
-      .then(function (authData) {
-        if (!authData) {
-          return defer.reject();
-        }
-
-        ref = entriesRef().push();
-
-        ref.set(angular.extend({}, data, {
-          author: authData.uid,
-          timestamp: Firebase.ServerValue.TIMESTAMP
-        }), function (err) {
-          if (err) {
-            return defer.reject(err);
-          }
-
-          userRef(authData.uid).child('entries/' + ref.key())
-
-            .set(true, function (err) {
-              if (err) {
-                return defer.reject(err);
-              }
-
-              defer.resolve();
-            });
-        });
-      });
-
-  return defer.promise;
-}
-*/

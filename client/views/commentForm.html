@@ -14,6 +14,7 @@
           name="comment_body"
           placeholder="Type your comment here"
           ng-model="ctrl.comment.body"
+          ng-disabled="ctrl.disableSubmit"
           required
           ng-maxlength="200"></textarea>
     </div>
@@ -22,9 +23,9 @@
       <char-counter limit="200" field="comment_form.comment_body"></char-counter>
 
       <button
-          class="btn btn-primary btn-sm"
+          class="btn btn-primary btn-xs"
           type="submit"
-          ng-disabled="comment_form.$invalid">
+          ng-disabled="comment_form.$invalid || ctrl.disableSubmit">
         Post comment
       </button>
     </div>
