@@ -41,7 +41,7 @@
           <a href="#" role="button" favorites="{{ ctrl.entry.$id }}">Favorites</a>
         </li>
         <li ng-if="ctrl.isLoggedIn && ctrl.isAuthor">
-          <a href="#" role="button" ng-click="ctrl.deleteEntry()">
+          <a href="#" role="button" ng-click="ctrl.deleteEntry($event)">
             Delete entry
           </a>
         </li>
@@ -50,4 +50,5 @@
   </div>
 
   <loader ng-if="ctrl.loading"></loader>
+
 </div>

@@ -1,0 +1,29 @@
+<div class="comment">
+
+  <div class="comment__avatar">
+    <a ui-sref="app.profile({ username: ctrl.author.username })">
+      <avatar width="25" height="25" data="ctrl.author"></avatar>
+    </a>
+  </div>
+
+  <div class="comment__meta">
+    <a ui-sref="app.profile({ username: ctrl.author.username })">{{ ctrl.author.name }}</a>,
+    <time class="text-muted" datetime="{{ ctrl.comment.timestamp | date:'yyyy-MM-ddTHH:mmZ' }}">
+        {{ ctrl.comment.timestamp | date:'MMM d, y H:mm' }}</time>
+
+  </div>
+
+  <div class="comment__body">
+    {{ ctrl.comment.body }}
+  </div>
+
+  <div ng-if="ctrl.isAuthor" class="comment__toolbar">
+    <a href="#" role="button" ng-click="ctrl.deleteComment($event)">
+      <span class="glyphicon glyphicon-remove"></span>
+      delete
+    </a>
+  </div>
+
+  <loader ng-if="ctrl.loading"></loader>
+
+</div>

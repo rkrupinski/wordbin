@@ -1,11 +1,29 @@
 (function () {
   'use strict';
 
-  function CommentsCtrl() {
+  function CommentsCtrl($firebaseArray, commentsRef) {
+    var self = this,
+        ref;
 
+    this.loading = true;
+
+    ref = commentsRef()
+
+        .orderByChild('target')
+        .startAt(this.entryId)
+        .endAt(this.entryId);
+
+    this.comments = $firebaseArray(ref);
+
+    this.comments.$loaded(function () {
+      self.loading = false;
+    });
   }
 
-  CommentsCtrl.$inject = [];
+  CommentsCtrl.$inject = [
+    '$firebaseArray',
+    'commentsRef'
+  ];
 
   function comments() {
 

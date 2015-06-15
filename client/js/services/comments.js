@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  function comments($q, entryRef, commentsRef, auth) {
+  function comments($q, entryRef, commentsRef, commentRef, auth) {
 
     return {
 
@@ -51,6 +51,64 @@
             });
 
         return defer.promise;
+      },
+
+      remove: function (commentId) {
+        var defer = $q.defer();
+
+        auth.waitForAuth()
+
+            .then(function (authData) {
+              var ref,
+                  entryId;
+
+              if (!authData) {
+                return defer.reject();
+              }
+
+              ref = commentRef(commentId);
+
+              ref.child('target').once('value', function (snap) {
+                entryId = snap.val();
+
+                ref.remove(function (err) {
+                  if (err) {
+                    return defer.reject(err);
+                  }
+
+                  entryRef(entryId).child('comments/' + commentId)
+
+                      .remove(function () {
+                        // Ignore error here
+                        defer.resolve();
+                      });
+                });
+              }, function (err) {
+                defer.reject(err);
+              });
+            });
+
+        return defer.promise;
+      },
+
+      isAuthor: function (commentId) {
+        var defer = $q.defer();
+
+        auth.waitForAuth()
+
+            .then(function (authData) {
+              if (!authData) {
+                return defer.resolve(null);
+              }
+
+              commentRef(commentId).once('value', function (snap) {
+                defer.resolve(snap.val().author === authData.uid);
+              }, function (err) {
+                defer.reject(err);
+              });
+            });
+
+        return defer.promise;
       }
 
     };
@@ -60,6 +118,7 @@
     '$q',
     'entryRef',
     'commentsRef',
+    'commentRef',
     'auth'
   ];
 

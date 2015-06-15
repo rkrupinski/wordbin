@@ -1,3 +1,11 @@
 <div class="comments">
+
+  <h3>Coments ({{ ctrl.comments.length }}):</h3>
+  
   <comment-form entry-id="ctrl.entryId"></comment-form>
+  
+  <comment ng-repeat="comment in ctrl.comments" data="comment"></comment>
+
+  <loader ng-if="ctrl.loading"></loader>
+
 </div>

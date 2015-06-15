@@ -6,7 +6,6 @@
 
     this._q = $q;
     this._state = $state;
-    this._auth = auth;
     this._user = user;
     this._entry = entry;
     this._through = through;
@@ -19,7 +18,14 @@
         .then(function (data) {
           self.author = data[0];
           self.isAuthor = data[1];
+        })
 
+        .catch(function (err) {
+          // TODO:
+          console.log(err);
+        })
+
+        .finally(function () {
           self.loading = false;
         });
   }
@@ -31,30 +37,32 @@
     ]);
   };
 
-  EntryCtrl.prototype.deleteEntry = function () {
+  EntryCtrl.prototype.deleteEntry = function (e) {
     var self = this;
+
+    e.preventDefault();
 
     this._through.confirm('Do you want to delete this entry?')
 
         .then(function () {
           self.loading = true;
 
-          self._entry.remove(self.entry.$id)
+          return self._entry.remove(self.entry.$id);
+        })
 
-              .then(function () {
-                return self._user.current();
-              })
+        .then(function () {
+          return self._user.current();
+        })
 
-              .then(function (authorData) {
-                self._state.go('app.profile', {
-                  username: authorData.username
-                });
-              })
+        .then(function (authorData) {
+          self._state.go('app.profile', {
+            username: authorData.username
+          });
+        })
 
-              .catch(function (err) {
-                // TODO
-                console.log(err);
-              });
+        .catch(function (err) {
+          // TODO
+          console.log(err);
         });
   };
 
