@@ -78,30 +78,3 @@
       .directive('userFavorites', userFavorites);
 
 }());
-
-/*
-function UserEntriesCtrl($firebaseArray, entriesRef) {
-  var self = this,
-      ref;
-
-  this.loading = true;
-
-  ref = entriesRef()
-
-      .orderByChild('author')
-      .equalTo(this.userId);
-
-  $firebaseArray(ref).$loaded()
-
-      .then(function (data) {
-        self.entries = data;
-
-        self.loading = false;
-      });
-}
-
-UserEntriesCtrl.$inject = [
-  '$firebaseArray',
-  'entriesRef'
-];
-*/
