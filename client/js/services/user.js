@@ -32,7 +32,8 @@
           }
 
           ref.once('child_added', function (snap) {
-            defer.resolve(snap.val());
+            defer.resolve(angular.extend({}, snap.val(),
+                { uid: snap.key() }));
           }, function (err) {
             defer.reject(err);
           });

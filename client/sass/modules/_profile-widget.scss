@@ -1,0 +1,24 @@
+.profile-widget {
+  min-height: 4em;
+  padding-left: 4.5em;
+  margin-bottom: 2em;
+  position: relative;
+
+  &__avatar {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  &__body {
+    word-wrap: break-word;
+
+    h1 {
+      margin: 0 0 .25em;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+}

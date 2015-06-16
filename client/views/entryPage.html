@@ -1,7 +1,9 @@
 <div class="row">
-  <div class="col-sm-6 col-sm-offset-3">
+  <div ng-if="ctrl.entry" class="col-sm-6 col-sm-offset-3">
 
-    <entry ng-if="ctrl.entry" data="ctrl.entry" full="true"></entry>
+    <entry data="ctrl.entry" full="true"></entry>
+
+    <comments entry-id="ctrl.entry.$id"></comments>
 
   </div>
 </div>

@@ -18,7 +18,7 @@
 <body>
   <div class="app" ui-view></div>
 
-  <loader class="loader--global" global-loader></loader>
+  <global-loader></global-loader>
 
   <!-- build:js({client,node_modules}) js/vendor.js -->
   <!-- bower:js -->
@@ -52,6 +52,8 @@
   <script src="js/services/ref/user.js"></script>
   <script src="js/services/ref/entries.js"></script>
   <script src="js/services/ref/entry.js"></script>
+  <script src="js/services/ref/comments.js"></script>
+  <script src="js/services/ref/comment.js"></script>
   <script src="js/services/authObj.js"></script>
   <script src="js/services/auth.js"></script>
   <script src="js/services/user.js"></script>
@@ -71,8 +73,15 @@
   <script src="js/directives/entry.js"></script>
   <script src="js/directives/loader.js"></script>
   <script src="js/directives/likeBtn.js"></script>
+  <script src="js/directives/commentBtn.js"></script>
   <script src="js/directives/favorites.js"></script>
   <script src="js/directives/userWidget.js"></script>
+  <script src="js/directives/comments.js"></script>
+  <script src="js/directives/comment.js"></script>
+  <script src="js/directives/commentForm.js"></script>
+  <script src="js/directives/profileWidget.js"></script>
+  <script src="js/directives/userEntries.js"></script>
+  <script src="js/directives/userFavorites.js"></script>
   <!-- endbuild -->
 </body>
 </html>

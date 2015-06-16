@@ -75,6 +75,17 @@
             meta: {
               title: 'Home'
             }
+          },
+          resolve: {
+            recentEntries: [
+              '$firebaseArray',
+              'entriesRef',
+              function ($firebaseArray, entriesRef) {
+                var ref = entriesRef().orderByChild('timestamp').limitToLast(5);
+
+                return $firebaseArray(ref).$loaded();
+              }
+            ]
           }
         })
 
@@ -93,9 +104,9 @@
           },
           resolve: {
             userData: [
-              'user',
               '$stateParams',
-              function (user, $stateParams) {
+              'user',
+              function ($stateParams, user) {
                 return user.byUsername($stateParams.username);
               }
             ]

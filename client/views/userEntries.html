@@ -1,0 +1,8 @@
+<div class="entries">
+  <p ng-if="!ctrl.loading && !ctrl.entries.length"
+      class="text-center">Nothing here yet ;(</p>
+
+  <div class="entries__item" ng-repeat="entry in ctrl.entries | orderBy:'-timestamp'">
+    <entry id="entry.$id" data="entry"></entry>
+  </div>
+</div>

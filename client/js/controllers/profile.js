@@ -2,7 +2,7 @@
   'use strict';
 
   function ProfileCtrl(userData) {
-    console.log('Profile:', userData);
+    this.profile = userData;
   }
 
   ProfileCtrl.$inject = [

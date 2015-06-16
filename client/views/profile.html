@@ -1,1 +1,21 @@
-<p>Profile</p>
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3">
+
+    <profile-widget data="ctrl.profile"></profile-widget>
+
+    <tabset justified="true">
+
+      <tab heading="Entries" select="loadEntries = true">
+        <user-entries user-id="ctrl.profile.uid"
+            ng-if="loadEntries"></user-entries>
+      </tab>
+
+      <tab heading="Favorites" select="loadFavorites = true">
+        <user-favorites user-id="ctrl.profile.uid"
+            ng-if="loadFavorites"></user-favorites>
+      </tab>
+
+    </tabset>
+
+  </div>
+</div>

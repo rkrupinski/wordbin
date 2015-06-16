@@ -1,0 +1,33 @@
+<form class="comment-form" name="comment_form" ng-show="ctrl.isLoggedIn"
+    ng-submit="ctrl.postComment($event)" novalidate>
+
+  <div class="comment">
+    <div class="comment__avatar">
+      <avatar width="25" height="25" data="ctrl.author"></avatar>
+    </div>
+
+    <div class="comment__input">
+      <label class="sr-only" for="comment_body">Type your comment here</label>
+      <textarea
+          id="comment_body"
+          class="form-control"
+          name="comment_body"
+          placeholder="Type your comment here"
+          ng-model="ctrl.comment.body"
+          ng-disabled="ctrl.disableSubmit"
+          required
+          ng-maxlength="200"></textarea>
+    </div>
+
+    <div class="comment__submit">
+      <char-counter limit="200" field="comment_form.comment_body"></char-counter>
+
+      <button
+          class="btn btn-primary btn-xs"
+          type="submit"
+          ng-disabled="comment_form.$invalid || ctrl.disableSubmit">
+        Post comment
+      </button>
+    </div>
+  </div>
+</form>

@@ -1,11 +1,8 @@
-.entry {
-  min-height: 4em;
-  padding-left: 4.5em;
+.comment {
+  min-height: 2.5em;
+  padding-left: 2.5em;
+  margin-bottom: 1.5em;
   position: relative;
-
-  &--full {
-    margin-bottom: 2em;
-  }
 
   &__avatar {
     position: absolute;
@@ -15,32 +12,33 @@
 
   &__meta {
     margin-bottom: .25em;
+    font-size: 12px;
     word-wrap: break-word;
   }
 
   &__body {
-    margin-bottom: .75em;
-    font-size: 1.5em;
     line-height: 1.25;
     word-wrap: break-word;
+
+    &:not(:last-child) {
+      margin-bottom: .5em;
+    }
   }
 
-  &__actions {
-
-    .btn {
-      margin-right: .5em;
-    }
-
-    .dropdown {
-      display: inline-block;
-    }
+  &__toolbar {
+    font-size: 12px;
   }
 
   &__input {
-
+    margin-bottom: .5em;
+    
     textarea {
-      height: 6em;
+      height: 4em;
       resize: vertical;
     }
+  }
+
+  &__submit {
+    text-align: right;
   }
 }

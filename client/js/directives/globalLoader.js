@@ -4,7 +4,8 @@
   function globalLoader() {
 
     return {
-      restrict: 'A',
+      restrict: 'E',
+      templateUrl: 'views/globalLoader.html',
       link: function (scope, element) {
         scope.$on('$stateChangeStart', function () {
           toggleLoader(true);

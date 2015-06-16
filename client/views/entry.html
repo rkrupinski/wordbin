@@ -1,27 +1,25 @@
-<div class="entry">
+<div class="entry" ng-class="{ 'entry--full': ctrl.full }">
 
-  <div class="entry__avatar">
-    <avatar width="48" height="48" data="ctrl.author"></avatar>
+  <div ng-if="!ctrl.loading" class="entry__avatar">
+    <a ui-sref="app.profile({ username: ctrl.author.username })">
+      <avatar width="48" height="48" data="ctrl.author"></avatar>
+    </a>
   </div>
 
-  <div class="entry__meta">
+  <div ng-if="!ctrl.loading" class="entry__meta">
     <a ui-sref="app.profile({ username: ctrl.author.username })">{{ ctrl.author.name }}</a>,
-    <time datetime="{{ ctrl.entry.timestamp | date:'yyyy-MM-ddTHH:mmZ' }}">
+    <time class="text-muted" datetime="{{ ctrl.entry.timestamp | date:'yyyy-MM-ddTHH:mmZ' }}">
         {{ ctrl.entry.timestamp | date:'MMM d, y H:mm' }}</time>
   </div>
 
-  <div class="entry__body">
+  <div ng-if="!ctrl.loading" class="entry__body">
     {{ ctrl.entry.body }}
   </div>
 
-  <div ng-if="!ctrl.full" class="entry__actions">
+  <div ng-if="!ctrl.full && !ctrl.loading" class="entry__actions">
     <like-btn entry-id="ctrl.entry.$id"></like-btn>
 
-    <a class="btn btn-default btn-sm"
-        ui-sref="app.entry({ entryId: ctrl.entry.$id })">
-      <span class="glyphicon glyphicon-comment"></span>
-      {{ ctrl.commentsCount }}
-    </a>
+    <comment-btn entry-id="ctrl.entry.$id"></comment-btn>
 
     <a class="btn btn-link btn-sm"
         ui-sref="app.entry({ entryId: ctrl.entry.$id })">Details</a>
@@ -29,6 +27,8 @@
 
   <div ng-if="ctrl.full && !ctrl.loading" class="entry__actions">
     <like-btn entry-id="ctrl.entry.$id"></like-btn>
+
+    
 
     <span class="dropdown">
       <button class="btn btn-default btn-sm" data-toggle="dropdown"
@@ -41,7 +41,7 @@
           <a href="#" role="button" favorites="{{ ctrl.entry.$id }}">Favorites</a>
         </li>
         <li ng-if="ctrl.isLoggedIn && ctrl.isAuthor">
-          <a href="#" role="button" ng-click="ctrl.deleteEntry()">
+          <a href="#" role="button" ng-click="ctrl.deleteEntry($event)">
             Delete entry
           </a>
         </li>
@@ -50,4 +50,5 @@
   </div>
 
   <loader ng-if="ctrl.loading"></loader>
+
 </div>
