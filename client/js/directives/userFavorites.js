@@ -14,7 +14,6 @@
     this._fetchData()
 
       .then(function (data) {
-        console.log(data);
         self.entries = data;
 
         self.loading = false;
