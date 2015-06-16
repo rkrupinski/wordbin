@@ -4,14 +4,14 @@
   function EntryCtrl($q, $state, auth, user, entry, through) {
     var self = this;
 
+    this.loading = true;
+    this.isLoggedIn = auth.isLoggedIn();
+
     this._q = $q;
     this._state = $state;
     this._user = user;
     this._entry = entry;
     this._through = through;
-
-    this.isLoggedIn = auth.isLoggedIn();
-    this.loading = true;
 
     this._fetchData()
 

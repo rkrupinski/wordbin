@@ -1,22 +1,22 @@
 <div class="entry" ng-class="{ 'entry--full': ctrl.full }">
 
-  <div class="entry__avatar">
+  <div ng-if="!ctrl.loading" class="entry__avatar">
     <a ui-sref="app.profile({ username: ctrl.author.username })">
       <avatar width="48" height="48" data="ctrl.author"></avatar>
     </a>
   </div>
 
-  <div class="entry__meta">
+  <div ng-if="!ctrl.loading" class="entry__meta">
     <a ui-sref="app.profile({ username: ctrl.author.username })">{{ ctrl.author.name }}</a>,
     <time class="text-muted" datetime="{{ ctrl.entry.timestamp | date:'yyyy-MM-ddTHH:mmZ' }}">
         {{ ctrl.entry.timestamp | date:'MMM d, y H:mm' }}</time>
   </div>
 
-  <div class="entry__body">
+  <div ng-if="!ctrl.loading" class="entry__body">
     {{ ctrl.entry.body }}
   </div>
 
-  <div ng-if="!ctrl.full" class="entry__actions">
+  <div ng-if="!ctrl.full && !ctrl.loading" class="entry__actions">
     <like-btn entry-id="ctrl.entry.$id"></like-btn>
 
     <comment-btn entry-id="ctrl.entry.$id"></comment-btn>

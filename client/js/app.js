@@ -104,9 +104,9 @@
           },
           resolve: {
             userData: [
-              'user',
               '$stateParams',
-              function (user, $stateParams) {
+              'user',
+              function ($stateParams, user) {
                 return user.byUsername($stateParams.username);
               }
             ]
