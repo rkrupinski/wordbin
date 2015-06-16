@@ -21,7 +21,8 @@
 
               ref.set(angular.extend({}, data, {
                 author: authData.uid,
-                timestamp: Firebase.ServerValue.TIMESTAMP
+                timestamp: Firebase.ServerValue.TIMESTAMP,
+                comments: { _: true }
               }), function (err) {
                 if (err) {
                   return defer.reject(err);
@@ -87,7 +88,7 @@
 
           userRef(data.author).once('value', function (snap) {
             defer.resolve({
-              data: data,
+              data: angular.extend({}, data, { $id: entryId }),
               author: snap.val()
             });
           });
