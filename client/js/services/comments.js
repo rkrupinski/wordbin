@@ -9,7 +9,7 @@
         var defer = $q.defer();
 
         entryRef(entryId).child('comments').once('value', function (snap) {
-          defer.resolve(snap.numChildren());
+          defer.resolve(snap.numChildren() - 1);
         }, function (err) {
           defer.reject(err);
         });
