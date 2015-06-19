@@ -12,9 +12,7 @@
         {{ ctrl.entry.timestamp | date:'MMM d, y H:mm' }}</time>
   </div>
 
-  <div ng-if="!ctrl.loading" class="entry__body">
-    {{ ctrl.entry.body }}
-  </div>
+  <div ng-if="!ctrl.loading" class="entry__body">{{ ctrl.entry.body }}</div>
 
   <div ng-if="!ctrl.full && !ctrl.loading" class="entry__actions">
     <like-btn entry-id="ctrl.entry.$id"></like-btn>

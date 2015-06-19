@@ -12,9 +12,7 @@
         {{ ctrl.comment.timestamp | date:'MMM d, y H:mm' }}</time>
   </div>
 
-  <div class="comment__body">
-    {{ ctrl.comment.body }}
-  </div>
+  <div class="comment__body">{{ ctrl.comment.body }}</div>
 
   <div ng-if="ctrl.isAuthor" class="comment__toolbar">
     <a href="#" role="button" ng-click="ctrl.deleteComment($event)">

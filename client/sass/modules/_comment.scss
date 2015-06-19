@@ -19,6 +19,7 @@
   &__body {
     line-height: 1.25;
     word-wrap: break-word;
+    white-space: pre-wrap;
 
     &:not(:last-child) {
       margin-bottom: .5em;
