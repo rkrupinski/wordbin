@@ -9,6 +9,7 @@
   angular
 
       .module('wordbin', [
+        'ngSanitize',
         'ui.router',
         'ui.bootstrap',
         'firebase',
