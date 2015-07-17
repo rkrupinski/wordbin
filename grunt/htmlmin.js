@@ -7,8 +7,6 @@ module.exports = function (grunt) {
       options: {
         removeComments: true,
         collapseWhitespace: true,
-        conservativeCollapse: true,
-        preserveLineBreaks: true,
         collapseBooleanAttributes: true,
         removeScriptTypeAttributes: true,
         removeStyleLinkTypeAttributes: true,
