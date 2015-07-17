@@ -13,7 +13,7 @@
 
     prod: {
       // TODO
-      firebaseUrl: 'https://wordbin.firebaseio.com/'
+      firebaseUrl: 'https://wordbin-dev.firebaseio.com/'
     }
 
   };
