@@ -12,8 +12,8 @@
     },
 
     prod: {
-      // firebaseUrl: 'https://wordbin.firebaseio.com/'
-      firebaseUrl: 'foo'
+      // TODO
+      firebaseUrl: 'https://wordbin.firebaseio.com/'
     }
 
   };
