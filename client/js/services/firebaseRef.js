@@ -12,8 +12,8 @@
     'config'
   ];
 
-  angular.module('wordbin')
+  angular.module('wordbin.services')
 
-    .factory('firebaseRef', firebaseRef);
+      .factory('firebaseRef', firebaseRef);
 
 }());

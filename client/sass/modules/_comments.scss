@@ -1,0 +1,7 @@
+.comments {
+  position: relative;
+
+  @media (min-width: $screen-md-min) {
+    padding-left: 4.5em;
+  }
+}

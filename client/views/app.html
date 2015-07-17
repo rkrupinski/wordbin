@@ -2,16 +2,26 @@
   <div class="container">
     
     <div class="navbar-header">
-      <a class="navbar-brand" href="/">
+      <a class="navbar-brand" ui-sref="app.home">
         Word
         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
         Bin
       </a>
     </div>
 
+    <entry-widget></entry-widget>
+
     <user-nav></user-nav>
 
   </div>
 </nav>
 
-<div class="container" ui-view></div>
+<div class="app-content">
+  <div class="container" ui-view></div>
+</div>
+
+<div class="container">
+  <p class="text-center">&copy; WordBin 2015</p>
+</div>
+
+<global-loader></global-loader>

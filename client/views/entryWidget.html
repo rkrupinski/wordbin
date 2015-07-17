@@ -1,0 +1,14 @@
+<form
+    class="navbar-form navbar-left"
+    novalidate
+    ng-show="ctrl.isLoggedIn"
+    ng-submit="ctrl.newEntry()">
+
+  <button
+      class="btn btn-default"
+      type="submit"
+      ng-disabled="ctrl.disableSubmit">
+    New entry
+  </button>
+
+</form>

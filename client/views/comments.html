@@ -1,0 +1,14 @@
+<div class="comments">
+
+  <h3>Coments ({{ ctrl.comments.length }}):</h3>
+  
+  <comment-form entry-id="ctrl.entryId"></comment-form>
+  
+  <comment ng-repeat="comment in ctrl.comments | orderBy:'-timestamp'"
+      data="comment"></comment>
+
+  <p ng-if="!ctrl.comments.length" class="text-center">No comments yet ;(</p>
+
+  <loader ng-if="ctrl.loading"></loader>
+
+</div>

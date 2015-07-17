@@ -16,7 +16,7 @@
   <!-- endbuild -->
 </head>
 <body>
-  <ui-view></ui-view>
+  <div class="app" ui-view></div>
 
   <!-- build:js({client,node_modules}) js/vendor.js -->
   <!-- bower:js -->
@@ -27,25 +27,60 @@
   <script src="bower_components/angularfire/dist/angularfire.js"></script>
   <script src="bower_components/bootstrap-sass/assets/javascripts/bootstrap.js"></script>
   <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
   <!-- endbower -->
   <!-- endbuild -->
   
-  <!-- build:js(client) js/app.js -->
+  <!-- build:js({.tmp,client}) js/app.js -->
+  <script src="templates/templates.js"></script>
   <script src="js/app.js"></script>
+
+  <script src="js/controllers/home.js"></script>
+  <script src="js/controllers/profile.js"></script>
+  <script src="js/controllers/entryPage.js"></script>
+  <script src="js/controllers/entryModal.js"></script>
+  <script src="js/controllers/favoritesModal.js"></script>
+  <script src="js/controllers/confirmModal.js"></script>
 
   <script src="js/services/env.js"></script>
   <script src="js/services/config.js"></script>
   <script src="js/services/firebase.js"></script>
   <script src="js/services/firebaseRef.js"></script>
+  <script src="js/services/ref/root.js"></script>
+  <script src="js/services/ref/users.js"></script>
+  <script src="js/services/ref/user.js"></script>
+  <script src="js/services/ref/entries.js"></script>
+  <script src="js/services/ref/entry.js"></script>
+  <script src="js/services/ref/comments.js"></script>
+  <script src="js/services/ref/comment.js"></script>
   <script src="js/services/authObj.js"></script>
   <script src="js/services/auth.js"></script>
   <script src="js/services/user.js"></script>
-  <script src="js/services/ref/root.js"></script>
-  <script src="js/services/ref/user.js"></script>
-  <script src="js/services/ref/users.js"></script>
+  <script src="js/services/entry.js"></script>
+  <script src="js/services/like.js"></script>
+  <script src="js/services/comments.js"></script>
+  <script src="js/services/entryModal.js"></script>
+  <script src="js/services/favoritesList.js"></script>
+  <script src="js/services/through.js"></script>
 
   <script src="js/directives/title.js"></script>
+  <script src="js/directives/globalLoader.js"></script>
   <script src="js/directives/userNav.js"></script>
+  <script src="js/directives/entryWidget.js"></script>
+  <script src="js/directives/charCounter.js"></script>
+  <script src="js/directives/avatar.js"></script>
+  <script src="js/directives/entry.js"></script>
+  <script src="js/directives/loader.js"></script>
+  <script src="js/directives/likeBtn.js"></script>
+  <script src="js/directives/commentBtn.js"></script>
+  <script src="js/directives/favorites.js"></script>
+  <script src="js/directives/userWidget.js"></script>
+  <script src="js/directives/comments.js"></script>
+  <script src="js/directives/comment.js"></script>
+  <script src="js/directives/commentForm.js"></script>
+  <script src="js/directives/profileWidget.js"></script>
+  <script src="js/directives/userEntries.js"></script>
+  <script src="js/directives/userFavorites.js"></script>
   <!-- endbuild -->
 </body>
 </html>

@@ -2,6 +2,9 @@
 
 module.exports = function (grunt) {
 
+  var precompiledReplace = new RegExp('^' +
+      grunt.config.get('directories').client + '\/');
+
   grunt.config('copy', {
     dist: {
       files: [
@@ -12,9 +15,19 @@ module.exports = function (grunt) {
           src: [
             'index.html',
             'favicon.ico',
-            'robots.txt',
-            'views/**/*.html'
+            'robots.txt'
           ]
+        },
+        {
+          // Copy templates; skip precompiled
+          expand: true,
+          cwd: '<%= directories.client %>',
+          dest: '<%= directories.dist %>/public',
+          src: [
+            'views/**/*.html'
+          ].concat(grunt.config.get('precompiled').map(function (url) {
+            return url.replace(precompiledReplace, '!');
+          }))
         },
         {
           // Copy bootstrap-sass font files

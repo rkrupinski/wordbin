@@ -1,0 +1,7 @@
+.entries {
+  margin-bottom: 2em;
+
+  &__item {
+    @extend %list-item;
+  }
+}

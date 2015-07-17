@@ -1,0 +1,45 @@
+.comment {
+  min-height: 2.5em;
+  padding-left: 2.5em;
+  margin-bottom: 1.5em;
+  position: relative;
+
+  &__avatar {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  &__meta {
+    margin-bottom: .25em;
+    font-size: 12px;
+    word-wrap: break-word;
+  }
+
+  &__body {
+    line-height: 1.25;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+
+    &:not(:last-child) {
+      margin-bottom: .5em;
+    }
+  }
+
+  &__toolbar {
+    font-size: 12px;
+  }
+
+  &__input {
+    margin-bottom: .5em;
+    
+    textarea {
+      height: 4em;
+      resize: vertical;
+    }
+  }
+
+  &__submit {
+    text-align: right;
+  }
+}

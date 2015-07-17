@@ -1,21 +1,21 @@
 (function () {
   'use strict';
 
-  function auth($state, authObj, user, config) {
+  function auth($injector, $state, authObj, user) {
 
     return {
 
       login: function login() {
 
-        return authObj.$authWithOAuthPopup(config.authProvider)
+        return authObj.$authWithOAuthPopup('twitter')
 
             .then(function () {
-              var authData = authObj.$getAuth();
+              var authData = $injector.get('auth').getAuth();
 
-              user.exists(authData.uid)
+              user.byUsername(authData.twitter.username)
 
-                  .then(function (exists) {
-                    if (!exists) {
+                  .then(function (data) {
+                    if (!data) {
                       return user.create(authData);
                     }
                   })
@@ -38,20 +38,28 @@
 
       isLoggedIn: function isLoggedIn() {
         return !!authObj.$getAuth();
+      },
+
+      getAuth: function getAuth() {
+        return authObj.$getAuth();
+      },
+
+      waitForAuth: function waitForAuth() {
+        return authObj.$waitForAuth();
       }
 
     };
   }
 
   auth.$inject = [
+    '$injector',
     '$state',
     'authObj',
-    'user',
-    'config'
+    'user'
   ];
 
-  angular.module('wordbin')
+  angular.module('wordbin.services')
 
-    .factory('auth', auth);
+      .factory('auth', auth);
 
 }());

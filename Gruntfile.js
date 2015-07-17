@@ -9,10 +9,23 @@ module.exports = function(grunt) {
     tmp: '.tmp'
   };
 
+  var precompiled = [
+    '<%= directories.client %>/views/entry.html',
+    '<%= directories.client %>/views/avatar.html',
+    '<%= directories.client %>/views/charCounter.html',
+    '<%= directories.client %>/views/entryWidget.html',
+    '<%= directories.client %>/views/userNav.html',
+    '<%= directories.client %>/views/loader.html',
+    '<%= directories.client %>/views/globalLoader.html',
+    '<%= directories.client %>/views/likeBtn.html',
+    '<%= directories.client %>/views/commentBtn.html'
+  ];
+
   require('time-grunt')(grunt);
 
   grunt.initConfig({
-    directories: directories
+    directories: directories,
+    precompiled: precompiled
   });
 
   grunt.loadTasks('grunt');
@@ -64,6 +77,7 @@ module.exports = function(grunt) {
     'wiredep',
     'useminPrepare',
     'autoprefixer',
+    'html2js',
     'concat',
     'copy:dist',
     'cssmin',

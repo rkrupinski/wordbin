@@ -2,4 +2,5 @@ wordbin
 =======
 
 TODO:
-* Angular 1.4?
+* Global error queue
+* `<meta name="description" content="">`

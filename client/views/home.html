@@ -1,1 +1,11 @@
-<p>Home</p>
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3">
+
+    <div class="entries">
+      <div class="entries__item" ng-repeat="entry in ctrl.entries | orderBy:'-timestamp'">
+        <entry id="entry.$id" data="entry"></entry>
+      </div>
+    </div>
+
+  </div>
+</div>

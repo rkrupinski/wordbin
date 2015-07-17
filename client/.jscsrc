@@ -18,7 +18,15 @@
   "maximumLineLength": 80,
   "requireCapitalizedConstructors": true,
   "requireCommaBeforeLineBreak": true,
-  "requireCurlyBraces": true,
+  "requireCurlyBraces": [
+    "if",
+    "else",
+    "for",
+    "while",
+    "do",
+    "try",
+    "catch"
+  ],
   "requireDollarBeforejQueryAssignment": true,
   "requireDotNotation": true,
   "requireLineBreakAfterVariableAssignment": true,
@@ -30,6 +38,7 @@
     "if",
     "switch",
     "case",
+    "default",
     "try",
     "while",
     "return"
@@ -37,7 +46,6 @@
   "requirePaddingNewLinesBeforeLineComments": {
     "allExcept": "firstAfterCurly"
   },
-  "requireParenthesesAroundIIFE": true,
   "requireSemicolons": true,
   "requireSpaceAfterBinaryOperators": true,
   "requireSpaceAfterKeywords": true,

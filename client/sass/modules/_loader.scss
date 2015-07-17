@@ -1,0 +1,11 @@
+.loader {
+  @include cover;
+
+  background: #fff url(/images/loader.gif) no-repeat 50% 50%;
+}
+
+.global-loader {
+  @include center(true, false);
+
+  top: 18px;
+}

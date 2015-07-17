@@ -4,8 +4,7 @@
   var configs = {
 
     shared: {
-      appName: 'WordBin',
-      authProvider: 'twitter'
+      appName: 'WordBin'
     },
 
     dev: {
@@ -13,8 +12,8 @@
     },
 
     prod: {
-      // firebaseUrl: 'https://wordbin.firebaseio.com/'
-      firebaseUrl: 'foo'
+      // TODO
+      firebaseUrl: 'https://wordbin.firebaseio.com/'
     }
 
   };
@@ -25,8 +24,8 @@
 
   config.$inject = ['env'];
 
-  angular.module('wordbin')
+  angular.module('wordbin.services')
 
-    .factory('config', config);
+      .factory('config', config);
 
 }());
