@@ -20,7 +20,7 @@
     <div class="users">
 
       <div class="users__item" ng-repeat="user in ctrl.favorites">
-        <div user-widget uid="user.$id"></div>
+        <user-widget uid="user.$id"></user-widget>
       </div>
 
       <p ng-if="!ctrl.favorites || !ctrl.favorites.length"

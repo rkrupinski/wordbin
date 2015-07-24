@@ -50,7 +50,7 @@
   function userWidget() {
 
     return {
-      restrict: 'A',
+      restrict: 'E',
       replace: true,
       templateUrl: 'views/userWidget.html',
       scope: true,
